@@ -68,6 +68,10 @@
                     <span class="material-symbols-outlined text-[20px]">work</span>
                     <span class="text-sm font-medium">Careers</span>
                 </a>
+                <a href="{{ route('admin.site-settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.site-settings.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">settings</span>
+                    <span class="text-sm font-medium">Site Settings</span>
+                </a>
                 <a href="{{ route('admin.home-settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.home-settings.*') ? 'bg-white/15' : '' }}">
                     <span class="material-symbols-outlined text-[20px]">home</span>
                     <span class="text-sm font-medium">Home Settings</span>
@@ -83,6 +87,18 @@
                 <a href="{{ route('admin.faqs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.faqs.*') ? 'bg-white/15' : '' }}">
                     <span class="material-symbols-outlined text-[20px]">help</span>
                     <span class="text-sm font-medium">FAQs</span>
+                </a>
+                <a href="{{ route('admin.alumni.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.alumni.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">diversity_3</span>
+                    <span class="text-sm font-medium">Alumni</span>
+                </a>
+                <a href="{{ route('admin.alumni-registrations.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.alumni-registrations.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+                    <span class="text-sm font-medium">Alumni Reg.</span>
+                </a>
+                <a href="{{ route('admin.alumni-settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.alumni-settings.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">settings</span>
+                    <span class="text-sm font-medium">Alumni Settings</span>
                 </a>
                 <a href="{{ route('admin.pages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.pages.*') ? 'bg-white/15' : '' }}">
                     <span class="material-symbols-outlined text-[20px]">description</span>

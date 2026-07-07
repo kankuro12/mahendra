@@ -97,6 +97,47 @@
                             </div>
                         </div>
                     @endif
+
+                    @php
+                        $fb = \App\Models\Setting::get('site_social_facebook');
+                        $yt = \App\Models\Setting::get('site_social_youtube');
+                        $li = \App\Models\Setting::get('site_social_linkedin');
+                        $ig = \App\Models\Setting::get('site_social_instagram');
+                    @endphp
+                    @if ($fb || $yt || $li || $ig)
+                        <div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant shadow-ambient hover:border-secondary transition-all duration-300">
+                            <div class="flex items-start gap-6">
+                                <div class="bg-primary-container/10 p-3 rounded-lg text-primary">
+                                    <span class="material-symbols-outlined text-3xl">share</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-headline-md text-headline-md text-on-background mb-4">Follow Us</h3>
+                                    <div class="flex gap-4">
+                                        @if ($fb)
+                                            <a href="{{ $fb }}" target="_blank" class="w-12 h-12 rounded-xl flex items-center justify-center hover:scale-110 transition-transform" style="background:#1877F2" title="Facebook">
+                                                @include('partials.social-icons', ['platform' => 'facebook', 'size' => 22])
+                                            </a>
+                                        @endif
+                                        @if ($yt)
+                                            <a href="{{ $yt }}" target="_blank" class="w-12 h-12 rounded-xl flex items-center justify-center hover:scale-110 transition-transform" style="background:#FF0000" title="YouTube">
+                                                @include('partials.social-icons', ['platform' => 'youtube', 'size' => 22])
+                                            </a>
+                                        @endif
+                                        @if ($li)
+                                            <a href="{{ $li }}" target="_blank" class="w-12 h-12 rounded-xl flex items-center justify-center hover:scale-110 transition-transform" style="background:#0A66C2" title="LinkedIn">
+                                                @include('partials.social-icons', ['platform' => 'linkedin', 'size' => 22])
+                                            </a>
+                                        @endif
+                                        @if ($ig)
+                                            <a href="{{ $ig }}" target="_blank" class="w-12 h-12 rounded-xl flex items-center justify-center hover:scale-110 transition-transform" style="background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF)" title="Instagram">
+                                                @include('partials.social-icons', ['platform' => 'instagram', 'size' => 22])
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Contact Form (Right Side) -->
@@ -155,26 +196,14 @@
                 </div>
             </div>
         </section>
-        <!-- Map Section -->
-        <section class="mb-20 px-gutter max-w-container-max mx-auto">
-            <div class="rounded-2xl overflow-hidden shadow-ambient border border-outline-variant relative group h-[500px]">
-                <div class="absolute inset-0 bg-surface-container z-0 flex items-center justify-center">
-                    <div class="w-full h-full bg-cover bg-center"
-                        data-alt="A highly detailed aerial landscape of Kathmandu, Nepal, with the Mahendra Secondary School building centrally located."
-                        data-location="Kathmandu, Nepal"
-                        style="background-image: url('{{ asset('assets/images/img_4721664e5b37.jpg') }}')"></div>
+        @php $mapUrl = \App\Models\Setting::get('contact_map_embed_url'); @endphp
+        @if ($mapUrl)
+            <section class="mb-20 px-gutter max-w-container-max mx-auto">
+                <div class="rounded-2xl overflow-hidden shadow-ambient border border-outline-variant h-[450px]">
+                    <iframe class="w-full h-full" src="{{ $mapUrl }}" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="absolute bottom-8 left-8 bg-surface-container-lowest p-6 rounded-xl shadow-lg border border-outline-variant z-10 max-w-sm hidden md:block">
-                    <h4 class="font-headline-md text-headline-md text-primary mb-2">Visit Our Campus</h4>
-                    <p class="text-on-surface-variant font-body-md mb-4">Centrally located in the heart of Kathmandu, our
-                        campus is easily accessible via public transport.</p>
-                    <a class="inline-flex items-center gap-2 text-secondary font-bold font-label-md hover:underline" href="#">
-                        Get Directions
-                        <span class="material-symbols-outlined">open_in_new</span>
-                    </a>
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif
         <!-- FAQ CTA Section -->
         <section class="bg-secondary-container/5 py-16 mb-20 border-y border-outline-variant/30">
             <div class="max-w-container-max mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-8">

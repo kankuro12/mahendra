@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AlbumController as AdminAlbumController;
+use App\Http\Controllers\Admin\AlumniController as AdminAlumniController;
+use App\Http\Controllers\Admin\AlumniRegistrationController;
+use App\Http\Controllers\Admin\AlumniSettingController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ContactSettingController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\Admin\LeadershipMessageController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NoticeController as AdminNoticeController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
+use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\FacilityController;
@@ -31,6 +35,7 @@ Route::get('/alumni', [PageController::class, 'alumni'])->name('alumni');
 Route::get('/teachers', [PageController::class, 'teachers'])->name('teachers');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'contactSubmit'])->name('contact.submit');
+Route::post('/alumni/register', [PageController::class, 'alumniRegister'])->name('alumni.register');
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
 // Institution Static Pages
@@ -86,7 +91,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/contact-messages/{contactMessage}', [ContactMessageController::class, 'show'])->name('contact-messages.show');
         Route::delete('/contact-messages/{contactMessage}', [ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
 
+        Route::get('/site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
+        Route::put('/site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update');
+
         Route::resource('faqs', AdminFaqController::class);
+        Route::resource('alumni', AdminAlumniController::class);
+
+        Route::get('/alumni-registrations', [AlumniRegistrationController::class, 'index'])->name('alumni-registrations.index');
+        Route::get('/alumni-registrations/{alumniRegistration}', [AlumniRegistrationController::class, 'show'])->name('alumni-registrations.show');
+        Route::delete('/alumni-registrations/{alumniRegistration}', [AlumniRegistrationController::class, 'destroy'])->name('alumni-registrations.destroy');
+
+        Route::get('/alumni-settings', [AlumniSettingController::class, 'index'])->name('alumni-settings.index');
+        Route::put('/alumni-settings', [AlumniSettingController::class, 'update'])->name('alumni-settings.update');
+
         Route::resource('departments', AdminDepartmentController::class);
     });
 });

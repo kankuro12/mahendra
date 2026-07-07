@@ -1,10 +1,11 @@
 <!-- Main Sticky Header -->
 <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest shadow-sm transition-all duration-300 border-b border-outline-variant w-full">
     <!-- Top Info Bar (Design System Mandate) -->
+    @php $navPhone = \App\Models\Setting::get('site_nav_phone', '+977-1-4XXXXXX'); $navEmail = \App\Models\Setting::get('site_nav_email', 'info@mahendraschool.edu.np'); @endphp
     <div id="top-info-bar" class="w-full bg-primary py-2 px-margin-mobile md:px-margin-desktop flex justify-between items-center text-white text-xs font-medium transition-all duration-300 max-h-12 opacity-100 overflow-hidden">
         <div class="flex gap-4">
-            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call</span> +977-1-4XXXXXX</span>
-            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">mail</span> info@mahendraschool.edu.np</span>
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call</span> {{ $navPhone }}</span>
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">mail</span> {{ $navEmail }}</span>
         </div>
         <div class="hidden md:flex gap-4 font-label-sm uppercase tracking-wider text-[10px]">
             <span>Affiliated with the Government of Nepal</span>
@@ -15,7 +16,7 @@
     <div id="nav-container" class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto w-full transition-all duration-300">
         <div class="flex items-center">
             <a href="{{ route('home') }}">
-                <h1 class="font-display-lg text-headline-md font-bold text-primary">Mahendra School</h1>
+                <h1 class="font-display-lg text-headline-md font-bold text-primary">{{ \App\Models\Setting::get('site_school_name', 'Mahendra School') }}</h1>
             </a>
         </div>
         <nav class="hidden lg:flex items-center gap-gutter">

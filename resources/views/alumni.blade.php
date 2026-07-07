@@ -4,234 +4,233 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/pages/alumni.css') }}">
+<style>
+.search-highlight { background: #fef3c7; padding: 0 2px; border-radius: 2px; }
+.alumni-card { transition: transform 0.2s, box-shadow 0.2s; }
+.alumni-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+</style>
 @endpush
 
 @section('content')
-
 <main>
-<!-- Hero Section: Our Global Alumni Network -->
+{{-- Hero Section --}}
 <section class="relative h-[600px] flex items-center overflow-hidden pt-28 md:pt-36">
-<div class="absolute inset-0 z-0">
-<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, high-angle view of a prestigious school campus at golden hour, featuring historic stone buildings and modern academic halls. The lighting is warm and ethereal, casting long soft shadows across manicured green lawns. The style is professional and institutional, utilizing a palette of deep crimson and royal blue tones to reflect a tradition of excellence." style="background-image: url('{{ asset('assets/images/img_0c19093695eb.jpg') }}')"></div>
-<div class="absolute inset-0 bg-gradient-to-r from-on-background/80 to-transparent"></div>
-</div>
-<div class="relative z-10 w-full max-w-container-max mx-auto px-gutter text-on-primary">
-<div class="max-w-2xl">
-<h1 class="font-display-lg text-display-lg mb-6 leading-tight">Celebrating Our <span class="text-primary-fixed">Global Alumni Network</span></h1>
-<p class="font-body-lg text-body-lg mb-8 opacity-90">From community leaders to international innovators, the Mahendra spirit reaches every corner of the globe. Reconnect with your legacy and empower the next generation.</p>
-<div class="flex flex-wrap gap-4">
-<a class="px-8 py-3 bg-primary text-on-primary font-label-md text-label-md rounded-full hover:scale-105 transition-transform duration-300 inline-flex items-center gap-2" href="#register">
-                            Join the Association <span class="material-symbols-outlined">arrow_forward</span>
-</a>
-<a class="px-8 py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white font-label-md text-label-md rounded-full hover:bg-white/20 transition-all" href="#events">
-                            Upcoming Reunions
-                        </a>
-</div>
-</div>
-</div>
+    <div class="absolute inset-0 z-0">
+        <div class="w-full h-full bg-cover bg-center"
+            style="background-image: url('{{ str_starts_with($heroImage, 'alumni/') ? asset('storage/' . $heroImage) : asset($heroImage) }}')">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-on-background/80 to-transparent"></div>
+    </div>
+    <div class="relative z-10 w-full max-w-container-max mx-auto px-gutter text-on-primary">
+        <div class="max-w-2xl">
+            <h1 class="font-display-lg text-display-lg mb-6 leading-tight">{!! $heroTitle !!}</h1>
+            <p class="font-body-lg text-body-lg mb-8 opacity-90">{{ $heroSubtitle }}</p>
+            <div class="flex flex-wrap gap-4">
+                <a class="px-8 py-3 bg-primary text-on-primary font-label-md text-label-md rounded-full hover:scale-105 transition-transform duration-300 inline-flex items-center gap-2" href="#register">
+                    Join the Association <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+                <a class="px-8 py-3 bg-white/10 backdrop-blur-md border border-white/30 text-white font-label-md text-label-md rounded-full hover:bg-white/20 transition-all" href="#search">
+                    Search Directory
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
-<!-- Stats Bento Grid -->
+
+{{-- Stats --}}
 <section class="py-16 bg-surface-container-low">
-<div class="max-w-container-max mx-auto px-gutter">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-<div class="bg-white p-8 rounded-xl border border-outline-variant shadow-sm text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-2">public</span>
-<div class="text-3xl font-bold text-primary">50+</div>
-<div class="text-label-sm text-on-surface-variant uppercase tracking-wider">Countries Represented</div>
-</div>
-<div class="bg-white p-8 rounded-xl border border-outline-variant shadow-sm text-center">
-<span class="material-symbols-outlined text-secondary text-4xl mb-2">groups</span>
-<div class="text-3xl font-bold text-secondary">15,000+</div>
-<div class="text-label-sm text-on-surface-variant uppercase tracking-wider">Active Members</div>
-</div>
-<div class="bg-white p-8 rounded-xl border border-outline-variant shadow-sm text-center">
-<span class="material-symbols-outlined text-tertiary text-4xl mb-2">school</span>
-<div class="text-3xl font-bold text-tertiary">200+</div>
-<div class="text-label-sm text-on-surface-variant uppercase tracking-wider">Scholarships Funded</div>
-</div>
-<div class="bg-white p-8 rounded-xl border border-outline-variant shadow-sm text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-2">history_edu</span>
-<div class="text-3xl font-bold text-primary">60 Years</div>
-<div class="text-label-sm text-on-surface-variant uppercase tracking-wider">of Academic Legacy</div>
-</div>
-</div>
-</div>
+    <div class="max-w-container-max mx-auto px-gutter">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            @foreach ($stats as $stat)
+                <div class="bg-white p-8 rounded-xl border border-outline-variant shadow-sm text-center">
+                    <span class="material-symbols-outlined text-primary text-4xl mb-2">{{ $stat['icon'] }}</span>
+                    <div class="text-3xl font-bold text-primary">{{ $stat['value'] }}</div>
+                    <div class="text-label-sm text-on-surface-variant uppercase tracking-wider">{{ $stat['label'] }}</div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </section>
-<!-- Distinguished Alumni Section -->
+
+{{-- Featured Alumni --}}
+@if ($featured->count())
 <section class="py-24">
-<div class="max-w-container-max mx-auto px-gutter">
-<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-<div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Distinguished Alumni</h2>
-<div class="h-1.5 w-24 bg-primary rounded-full"></div>
-</div>
-<p class="max-w-md text-on-surface-variant">Spotlighting the extraordinary journeys and achievements of our graduates across various fields.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<!-- Alumni Card 1 -->
-<div class="group relative bg-white rounded-xl overflow-hidden border border-outline-variant transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-<div class="h-64 overflow-hidden relative">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A professional portrait of a woman in her 40s, a successful medical researcher, wearing a white lab coat in a modern laboratory setting. She is smiling confidently. The lighting is bright and professional, emphasizing a clean and corporate aesthetic with subtle blue background accents. High-quality digital photography style." src="{{ asset('assets/images/img_ed194979c158.jpg') }}"/>
-<div class="absolute bottom-0 left-0 p-4 bg-primary text-on-primary font-label-sm rounded-tr-lg">Class of 1998</div>
-</div>
-<div class="p-6">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Dr. Arati Sharma</h3>
-<p class="text-primary font-medium mb-4">Lead Epidemiologist, WHO</p>
-<p class="text-on-surface-variant font-body-md line-clamp-3">Pioneering work in infectious disease control across Southeast Asia. Arati credits Mahendra's science labs for sparking her lifelong passion for research.</p>
-<div class="mt-6 pt-6 border-t border-outline-variant flex justify-between items-center">
-<a class="text-primary font-bold text-label-md flex items-center gap-1 hover:underline" href="#">Read Story <span class="material-symbols-outlined text-sm">open_in_new</span></a>
-</div>
-</div>
-</div>
-<!-- Alumni Card 2 -->
-<div class="group relative bg-white rounded-xl overflow-hidden border border-outline-variant transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-<div class="h-64 overflow-hidden relative">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A charismatic man in his late 30s, a tech entrepreneur, sitting in a vibrant, modern coworking space with glass walls and indoor plants. He is dressed in business casual attire. The lighting is natural and bright, conveying a sense of innovation and success. The color palette is modern with royal blue and clean white tones." src="{{ asset('assets/images/img_a712d6875dcf.jpg') }}"/>
-<div class="absolute bottom-0 left-0 p-4 bg-primary text-on-primary font-label-sm rounded-tr-lg">Class of 2005</div>
-</div>
-<div class="p-6">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Sanjay Mahato</h3>
-<p class="text-primary font-medium mb-4">Founder, GreenTech Nepal</p>
-<p class="text-on-surface-variant font-body-md line-clamp-3">Revolutionizing sustainable energy solutions in rural areas. Sanjay was a student leader at Mahendra, where he learned the foundations of entrepreneurship.</p>
-<div class="mt-6 pt-6 border-t border-outline-variant flex justify-between items-center">
-<a class="text-primary font-bold text-label-md flex items-center gap-1 hover:underline" href="#">Read Story <span class="material-symbols-outlined text-sm">open_in_new</span></a>
-</div>
-</div>
-</div>
-<!-- Alumni Card 3 -->
-<div class="group relative bg-white rounded-xl overflow-hidden border border-outline-variant transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-<div class="h-64 overflow-hidden relative">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A dignified woman in her 50s, an international diplomat, standing in front of a government building with flags in the background. She is wearing traditional elegant attire combined with professional styling. The setting is formal and authoritative. The lighting is soft and even, highlighting her presence. The colors are rich and respectful." src="{{ asset('assets/images/img_1c0038c95435.jpg') }}"/>
-<div class="absolute bottom-0 left-0 p-4 bg-primary text-on-primary font-label-sm rounded-tr-lg">Class of 1985</div>
-</div>
-<div class="p-6">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Hon. Maya Devi</h3>
-<p class="text-primary font-medium mb-4">UN Special Envoy</p>
-<p class="text-on-surface-variant font-body-md line-clamp-3">Advocating for global education equity and human rights. Her journey from Mahendra's debate club to the world stage inspires students every day.</p>
-<div class="mt-6 pt-6 border-t border-outline-variant flex justify-between items-center">
-<a class="text-primary font-bold text-label-md flex items-center gap-1 hover:underline" href="#">Read Story <span class="material-symbols-outlined text-sm">open_in_new</span></a>
-</div>
-</div>
-</div>
-</div>
-</div>
+    <div class="max-w-container-max mx-auto px-gutter">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Distinguished Alumni</h2>
+                <div class="h-1.5 w-24 bg-primary rounded-full"></div>
+            </div>
+            <p class="max-w-md text-on-surface-variant">Spotlighting the extraordinary journeys and achievements of our graduates across various fields.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach ($featured as $a)
+                <div class="alumni-card group relative bg-white rounded-xl overflow-hidden border border-outline-variant">
+                    <div class="h-64 overflow-hidden relative">
+                        @if ($a->image)
+                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                src="{{ asset('storage/' . $a->image) }}" alt="{{ $a->name }}">
+                        @else
+                            <div class="w-full h-full bg-surface-dim flex items-center justify-center">
+                                <span class="material-symbols-outlined text-5xl text-outline">person</span>
+                            </div>
+                        @endif
+                        @if ($a->graduation_year)
+                            <div class="absolute bottom-0 left-0 p-4 bg-primary text-on-primary font-label-sm rounded-tr-lg">Class of {{ $a->graduation_year }}</div>
+                        @endif
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-1">{{ $a->name }}</h3>
+                        @if ($a->occupation)
+                            <p class="text-primary font-medium mb-4">{{ $a->occupation }}</p>
+                        @endif
+                        @if ($a->story)
+                            <p class="text-on-surface-variant font-body-md line-clamp-3">{{ $a->story }}</p>
+                        @endif
+                        @if ($a->facebook || $a->linkedin)
+                            <div class="mt-6 pt-6 border-t border-outline-variant flex gap-3">
+                                @if ($a->facebook) <a href="{{ $a->facebook }}" target="_blank" class="text-primary hover:opacity-80"><span class="material-symbols-outlined">link</span></a> @endif
+                                @if ($a->linkedin) <a href="{{ $a->linkedin }}" target="_blank" class="text-primary hover:opacity-80"><span class="material-symbols-outlined">badge</span></a> @endif
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </section>
-<!-- Upcoming Reunions & Registration Grid -->
-<section class="py-24 bg-surface-container-high">
-<div class="max-w-container-max mx-auto px-gutter">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-<!-- Reunions Column -->
-<div id="events">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Upcoming Reunions</h2>
-<div class="space-y-6">
-<!-- Event 1 -->
-<div class="bg-white p-6 rounded-xl border-l-4 border-primary shadow-sm hover:shadow-md transition-shadow">
-<div class="flex items-start gap-4">
-<div class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg text-center min-w-[80px]">
-<div class="font-bold text-xl">15</div>
-<div class="text-xs uppercase font-bold">OCT</div>
-</div>
-<div>
-<h4 class="font-headline-md text-body-lg font-bold text-on-surface">Silver Jubilee: Class of 1999</h4>
-<p class="text-on-surface-variant flex items-center gap-1 text-sm mt-1">
-<span class="material-symbols-outlined text-sm">location_on</span> Main Campus Auditorium
-                                        </p>
-<p class="mt-3 text-on-surface-variant">A grand gala celebrating 25 years since graduation. Dinner, music, and nostalgia included.</p>
-<button class="mt-4 text-primary font-bold text-sm uppercase tracking-wider hover:opacity-80">RSVP Now</button>
-</div>
-</div>
-</div>
-<!-- Event 2 -->
-<div class="bg-white p-6 rounded-xl border-l-4 border-secondary shadow-sm hover:shadow-md transition-shadow">
-<div class="flex items-start gap-4">
-<div class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg text-center min-w-[80px]">
-<div class="font-bold text-xl">02</div>
-<div class="text-xs uppercase font-bold">DEC</div>
-</div>
-<div>
-<h4 class="font-headline-md text-body-lg font-bold text-on-surface">Annual Alumni Sports Meet</h4>
-<p class="text-on-surface-variant flex items-center gap-1 text-sm mt-1">
-<span class="material-symbols-outlined text-sm">location_on</span> School Sports Grounds
-                                        </p>
-<p class="mt-3 text-on-surface-variant">Current students vs. Alumni in football, basketball, and athletics. Family-friendly event.</p>
-<button class="mt-4 text-primary font-bold text-sm uppercase tracking-wider hover:opacity-80">Join Tournament</button>
-</div>
-</div>
-</div>
-<!-- Event 3 -->
-<div class="bg-white p-6 rounded-xl border-l-4 border-tertiary shadow-sm hover:shadow-md transition-shadow">
-<div class="flex items-start gap-4">
-<div class="bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-lg text-center min-w-[80px]">
-<div class="font-bold text-xl">12</div>
-<div class="text-xs uppercase font-bold">JAN</div>
-</div>
-<div>
-<h4 class="font-headline-md text-body-lg font-bold text-on-surface">Global Networking Virtual Meet</h4>
-<p class="text-on-surface-variant flex items-center gap-1 text-sm mt-1">
-<span class="material-symbols-outlined text-sm">videocam</span> Online (Zoom)
-                                        </p>
-<p class="mt-3 text-on-surface-variant">Connecting our international alumni for professional growth and mentorship opportunities.</p>
-<button class="mt-4 text-primary font-bold text-sm uppercase tracking-wider hover:opacity-80">Get Link</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Registration Form Column -->
-<div class="bg-white p-10 rounded-2xl border border-outline-variant shadow-xl" id="register">
-<div class="mb-8">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Alumni Association</h2>
-<p class="text-on-surface-variant">Register to stay updated on school news, networking events, and exclusive alumni benefits.</p>
-</div>
-<form class="space-y-6">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div>
-<label class="block text-sm font-bold text-on-surface mb-2">Full Name</label>
-<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="John Doe" type="text"/>
-</div>
-<div>
-<label class="block text-sm font-bold text-on-surface mb-2">Year of Graduation</label>
-<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="e.g., 2010" type="number"/>
-</div>
-</div>
-<div>
-<label class="block text-sm font-bold text-on-surface mb-2">Email Address</label>
-<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="john@example.com" type="email"/>
-</div>
-<div>
-<label class="block text-sm font-bold text-on-surface mb-2">Current Occupation &amp; Location</label>
-<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Software Engineer, London" type="text"/>
-</div>
-<div>
-<label class="flex items-start gap-3 cursor-pointer">
-<input class="mt-1 text-primary focus:ring-primary rounded border-outline-variant" type="checkbox"/>
-<span class="text-sm text-on-surface-variant">I would like to volunteer for the Alumni Mentorship Program for current students.</span>
-</label>
-</div>
-<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:bg-on-primary-fixed-variant transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg" type="submit">
-                                Submit Registration
-                            </button>
-</form>
-</div>
-</div>
-</div>
-</section>
-<!-- Newsletter / Community Section -->
-<section class="py-20 bg-primary overflow-hidden relative">
-<div class="absolute right-0 top-0 opacity-10 pointer-events-none">
-<span class="material-symbols-outlined text-[300px]" style="font-variation-settings: 'wght' 700;">school</span>
-</div>
-<div class="max-w-container-max mx-auto px-gutter relative z-10 text-center">
-<h2 class="font-headline-lg text-headline-lg text-on-primary mb-6">Lost Touch with a Classmate?</h2>
-<p class="text-on-primary-container text-body-lg mb-10 max-w-2xl mx-auto">Access our secure Alumni Directory to find old friends and expand your professional network within the Mahendra community.</p>
-<button class="px-10 py-4 bg-white text-primary font-bold rounded-full hover:shadow-2xl transition-all inline-flex items-center gap-2">
-<span class="material-symbols-outlined">search</span> Search Directory
+@endif
+
+{{-- Search & Directory --}}
+<section id="search" class="py-24 bg-surface-container-high">
+    <div class="max-w-container-max mx-auto px-gutter">
+        <div class="text-center mb-12">
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Alumni Directory</h2>
+            <p class="text-on-surface-variant max-w-xl mx-auto">Search by name, graduation year, occupation, or location.</p>
+        </div>
+
+        <form method="GET" action="{{ route('alumni') }}#search" class="max-w-2xl mx-auto mb-10">
+            <div class="flex gap-3">
+                <input type="text" name="search" value="{{ request('search') }}"
+                    placeholder="Search alumni..."
+                    class="flex-1 px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none">
+                <button type="submit"
+                    class="px-6 py-3 bg-primary text-white rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined">search</span> Search
                 </button>
-</div>
+                @if (request('search'))
+                    <a href="{{ route('alumni') }}"
+                        class="px-4 py-3 border border-outline-variant rounded-lg text-gray-500 hover:bg-gray-50 transition-colors flex items-center">Clear</a>
+                @endif
+            </div>
+        </form>
+
+        @if (request('search'))
+            <p class="text-center text-sm text-on-surface-variant mb-8">
+                Found <strong>{{ $alumni->total() }}</strong> result{{ $alumni->total() !== 1 ? 's' : '' }} for "{{ request('search') }}"
+            </p>
+        @endif
+
+        @if ($alumni->count())
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                @foreach ($alumni as $a)
+                    <div class="alumni-card bg-white rounded-xl border border-outline-variant overflow-hidden">
+                        @if ($a->image)
+                            <img src="{{ asset('storage/' . $a->image) }}" class="w-full h-48 object-cover">
+                        @else
+                            <div class="w-full h-48 bg-surface-dim flex items-center justify-center">
+                                <span class="material-symbols-outlined text-4xl text-outline">person</span>
+                            </div>
+                        @endif
+                        <div class="p-4">
+                            <h3 class="font-bold text-on-surface">{{ $a->name }}</h3>
+                            @if ($a->graduation_year) <p class="text-xs text-primary font-semibold">Class of {{ $a->graduation_year }}</p> @endif
+                            @if ($a->occupation) <p class="text-sm text-on-surface-variant mt-1">{{ $a->occupation }}</p> @endif
+                            @if ($a->location) <p class="text-xs text-outline mt-1">{{ $a->location }}</p> @endif
+                            @if ($a->story) <p class="text-xs text-on-surface-variant mt-2 line-clamp-2">{{ $a->story }}</p> @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="mt-10">
+                {{ $alumni->links() }}
+            </div>
+        @elseif (request('search'))
+            <div class="text-center py-12 text-on-surface-variant">
+                <span class="material-symbols-outlined text-5xl block mb-3">search_off</span>
+                <p>No alumni found matching your search.</p>
+            </div>
+        @else
+            <div class="text-center py-12 text-on-surface-variant">
+                <span class="material-symbols-outlined text-5xl block mb-3">diversity_3</span>
+                <p>No alumni listed yet.</p>
+            </div>
+        @endif
+    </div>
+</section>
+
+{{-- Registration Form --}}
+<section class="py-24">
+    <div class="max-w-container-max mx-auto px-gutter">
+        <div class="max-w-2xl mx-auto bg-white p-10 rounded-2xl border border-outline-variant shadow-xl" id="register">
+            <div class="mb-8">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Alumni Association</h2>
+                <p class="text-on-surface-variant">Register to stay updated on school news, networking events, and exclusive alumni benefits.</p>
+            </div>
+            @if (session('success'))
+                <div class="mb-6 px-6 py-4 bg-green-50 border border-green-200 text-green-700 rounded-lg text-center font-medium">{{ session('success') }}</div>
+            @endif
+            <form class="space-y-6" method="POST" action="{{ route('alumni.register') }}">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-on-surface mb-2">Full Name</label>
+                        <input name="name" value="{{ old('name') }}" class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="John Doe" required>
+                        @error('name') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-on-surface mb-2">Email</label>
+                        <input name="email" type="email" value="{{ old('email') }}" class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="john@example.com" required>
+                        @error('email') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-on-surface mb-2">Graduation Year</label>
+                        <input name="graduation_year" type="number" value="{{ old('graduation_year') }}" class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="e.g. 2010">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-on-surface mb-2">Occupation</label>
+                        <input name="occupation" value="{{ old('occupation') }}" class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="e.g. Engineer">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-on-surface mb-2">Location</label>
+                    <input name="location" value="{{ old('location') }}" class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="e.g. Kathmandu, Nepal">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-on-surface mb-2">Message</label>
+                    <textarea name="message" rows="3" class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="Optional message">{{ old('message') }}</textarea>
+                </div>
+                <button type="submit" class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:brightness-110 transition-all shadow-lg">Submit Registration</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{{-- CTA --}}
+<section class="py-20 bg-primary overflow-hidden relative">
+    <div class="absolute right-0 top-0 opacity-10 pointer-events-none">
+        <span class="material-symbols-outlined text-[300px]" style="font-variation-settings: 'wght' 700;">school</span>
+    </div>
+    <div class="max-w-container-max mx-auto px-gutter relative z-10 text-center">
+        <h2 class="font-headline-lg text-headline-lg text-on-primary mb-6">Lost Touch with a Classmate?</h2>
+        <p class="text-on-primary-container text-body-lg mb-10 max-w-2xl mx-auto">Use our Alumni Directory above to find old friends and expand your professional network.</p>
+        <a href="#search" class="px-10 py-4 bg-white text-primary font-bold rounded-full hover:shadow-2xl transition-all inline-flex items-center gap-2">
+            <span class="material-symbols-outlined">search</span> Search Directory
+        </a>
+    </div>
 </section>
 </main>
 @endsection
-
-@push('scripts')
-<script src="{{ asset('assets/js/pages/alumni.js') }}" defer></script>
-@endpush

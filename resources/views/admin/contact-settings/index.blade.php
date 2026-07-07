@@ -78,6 +78,18 @@
                 </div>
             </div>
 
+            {{-- Map Embed --}}
+            <div class="mb-8">
+                <h3 class="text-base font-semibold text-gray-900 mb-3">Map</h3>
+                <div class="space-y-1.5">
+                    <label for="map_embed_url" class="block text-sm font-medium text-gray-700">Google Maps Embed URL</label>
+                    <input type="url" name="map_embed_url" id="map_embed_url" value="{{ $map_embed_url }}"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#b1002c] focus:border-[#b1002c] outline-none"
+                        placeholder="https://www.google.com/maps/embed?pb=...">
+                    <p class="text-xs text-gray-400">Go to Google Maps &rarr; Share &rarr; Embed a map &rarr; Copy the <code>src</code> URL from the iframe.</p>
+                </div>
+            </div>
+
             {{-- Office Hours --}}
             <div class="mb-8">
                 <div class="flex items-center justify-between mb-3">

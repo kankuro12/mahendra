@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlumniRegistration;
+use App\Models\Alumnus;
 use App\Models\ContactMessage;
 use App\Models\Department;
 use App\Models\Document;
@@ -39,9 +41,33 @@ class PageController extends Controller
         return view('notice', compact('notices'));
     }
 
-    public function alumni()
+    public function alumni(Request $request)
     {
-        return view('alumni');
+        $query = Alumnus::published()->orderBy('sort_order');
+
+        if ($request->filled('search')) {
+            $query->search($request->search);
+        }
+
+        $alumni = $query->paginate(12)->withQueryString();
+        $featured = Alumnus::featured()->published()->orderBy('sort_order')->get();
+        $countries = Alumnus::published()->whereNotNull('location')->distinct()->pluck('location')->map(function ($loc) {
+            $parts = explode(',', $loc);
+
+            return trim(end($parts));
+        })->unique()->sort()->values();
+
+        $heroImage = Setting::get('alumni_hero_image', 'assets/images/img_0c19093695eb.jpg');
+        $heroTitle = Setting::get('alumni_hero_title', 'Celebrating Our Global Alumni Network');
+        $heroSubtitle = Setting::get('alumni_hero_subtitle', 'From community leaders to international innovators, the Mahendra spirit reaches every corner of the globe.');
+        $stats = [
+            ['value' => Setting::get('alumni_stat_countries', '50+'), 'icon' => 'public', 'label' => Setting::get('alumni_stat_countries_label', 'Countries Represented')],
+            ['value' => Setting::get('alumni_stat_members', '15,000+'), 'icon' => 'groups', 'label' => Setting::get('alumni_stat_members_label', 'Active Members')],
+            ['value' => Setting::get('alumni_stat_scholarships', '200+'), 'icon' => 'school', 'label' => Setting::get('alumni_stat_scholarships_label', 'Scholarships Funded')],
+            ['value' => Setting::get('alumni_stat_years', '60 Years'), 'icon' => 'history_edu', 'label' => Setting::get('alumni_stat_years_label', 'of Academic Legacy')],
+        ];
+
+        return view('alumni', compact('alumni', 'featured', 'countries', 'heroImage', 'heroTitle', 'heroSubtitle', 'stats'));
     }
 
     public function teachers()
@@ -102,6 +128,22 @@ class PageController extends Controller
         $careers = Document::careers()->where('published', true)->orderBy('sort_order')->get();
 
         return view('careers', compact('careers'));
+    }
+
+    public function alumniRegister(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'graduation_year' => 'nullable|integer|min:1950|max:2099',
+            'occupation' => 'nullable|max:255',
+            'location' => 'nullable|max:255',
+            'message' => 'nullable',
+        ]);
+
+        AlumniRegistration::create($data);
+
+        return back()->with('success', 'Thank you! Your alumni registration has been submitted successfully.');
     }
 
     public function faq()
