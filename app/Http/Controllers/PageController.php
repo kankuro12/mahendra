@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Document;
 use App\Models\Event;
 use App\Models\LeadershipMessage;
 use App\Models\Notice;
+use App\Models\Page;
 
 class PageController extends Controller
 {
@@ -49,21 +51,29 @@ class PageController extends Controller
 
     public function privacy()
     {
-        return view('privacy');
+        $page = Page::where('slug', 'privacy')->where('published', true)->firstOrFail();
+
+        return view('page', compact('page'));
     }
 
     public function tenders()
     {
-        return view('tenders');
+        $tenders = Document::tenders()->where('published', true)->orderBy('sort_order')->get();
+
+        return view('tenders', compact('tenders'));
     }
 
     public function downloads()
     {
-        return view('downloads');
+        $downloads = Document::downloads()->where('published', true)->orderBy('sort_order')->get();
+
+        return view('downloads', compact('downloads'));
     }
 
     public function careers()
     {
-        return view('careers');
+        $careers = Document::careers()->where('published', true)->orderBy('sort_order')->get();
+
+        return view('careers', compact('careers'));
     }
 }

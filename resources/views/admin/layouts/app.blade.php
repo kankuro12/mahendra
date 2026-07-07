@@ -56,6 +56,22 @@
                     <span class="text-sm font-medium">Departments</span>
                 </a>
                 <hr class="border-white/20 my-3">
+                <a href="{{ route('admin.documents.index', ['type' => 'download']) }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.documents.*') && request('type') === 'download' ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">download</span>
+                    <span class="text-sm font-medium">Downloads</span>
+                </a>
+                <a href="{{ route('admin.documents.index', ['type' => 'tender']) }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.documents.*') && request('type') === 'tender' ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">gavel</span>
+                    <span class="text-sm font-medium">Tenders</span>
+                </a>
+                <a href="{{ route('admin.documents.index', ['type' => 'career']) }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.documents.*') && request('type') === 'career' ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">work</span>
+                    <span class="text-sm font-medium">Careers</span>
+                </a>
+                <a href="{{ route('admin.pages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.pages.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">description</span>
+                    <span class="text-sm font-medium">Pages</span>
+                </a>
                 <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors">
                     <span class="material-symbols-outlined text-[20px]">open_in_new</span>
                     <span class="text-sm font-medium">View Site</span>

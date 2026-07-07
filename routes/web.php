@@ -3,12 +3,14 @@
 use App\Http\Controllers\Admin\AlbumController as AdminAlbumController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController as AdminDepartmentController;
+use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\FacilityController as AdminFacilityController;
 use App\Http\Controllers\Admin\GalleryItemController;
 use App\Http\Controllers\Admin\LeadershipMessageController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NoticeController as AdminNoticeController;
+use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\FacilityController;
@@ -55,6 +57,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/upload-image', [UploadController::class, 'image'])->name('upload.image');
 
         Route::resource('notices', AdminNoticeController::class);
+        Route::resource('pages', AdminPageController::class)->except('show');
 
         Route::prefix('albums/{album}/items')->name('albums.items.')->group(function () {
             Route::get('/', [GalleryItemController::class, 'index'])->name('index');
@@ -68,6 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('albums', AdminAlbumController::class);
         Route::resource('messages', LeadershipMessageController::class);
         Route::resource('teachers', AdminTeacherController::class);
+        Route::resource('documents', AdminDocumentController::class);
         Route::resource('events', AdminEventController::class);
         Route::resource('departments', AdminDepartmentController::class);
 
