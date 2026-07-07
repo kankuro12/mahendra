@@ -5,6 +5,10 @@
       "headers": {
         "X-Goog-Api-Key": "AQ.Ab8RN6L0zTtNDeIUzC-dLFBz-t2LyKaFOPSknWLmi84toUlzKw"
       }
+    },
+    "boost": {
+      "command": "php84",
+      "args": ["artisan", "boost:mcp"]
     }
   }
 }
