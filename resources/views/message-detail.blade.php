@@ -63,35 +63,16 @@
             <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant space-y-4">
                 <h4 class="font-bold text-on-surface text-lg border-b border-outline-variant pb-2">Other Messages</h4>
                 <div class="flex flex-col gap-3">
-                    @if($message['slug'] !== 'principal')
-                    <a href="{{ route('message-detail', ['slug' => 'principal']) }}" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/50 hover:border-primary transition-all group">
+                    @php $otherMessages = \App\Models\LeadershipMessage::where('slug', '!=', $message['slug'])->get(); @endphp
+                    @foreach($otherMessages as $other)
+                    <a href="{{ route('message-detail', ['slug' => $other['slug']]) }}" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/50 hover:border-primary transition-all group">
                         <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">account_circle</span>
                         <div>
-                            <p class="font-bold text-sm text-on-surface group-hover:text-primary">Principal's Message</p>
-                            <p class="text-xs text-outline font-semibold">Dr. Hemanta Raj Joshi</p>
+                            <p class="font-bold text-sm text-on-surface group-hover:text-primary">{{ $other['title'] }}</p>
+                            <p class="text-xs text-outline font-semibold">{{ $other['author'] }}</p>
                         </div>
                     </a>
-                    @endif
-
-                    @if($message['slug'] !== 'chairman')
-                    <a href="{{ route('message-detail', ['slug' => 'chairman']) }}" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/50 hover:border-primary transition-all group">
-                        <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">account_circle</span>
-                        <div>
-                            <p class="font-bold text-sm text-on-surface group-hover:text-primary">Chairman's Message</p>
-                            <p class="text-xs text-outline font-semibold">Mr. Ram Bahadur Thapa</p>
-                        </div>
-                    </a>
-                    @endif
-
-                    @if($message['slug'] !== 'administration')
-                    <a href="{{ route('message-detail', ['slug' => 'administration']) }}" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/50 hover:border-primary transition-all group">
-                        <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">account_circle</span>
-                        <div>
-                            <p class="font-bold text-sm text-on-surface group-hover:text-primary">Administration's Message</p>
-                            <p class="text-xs text-outline font-semibold">Mrs. Sunita Dahal</p>
-                        </div>
-                    </a>
-                    @endif
+                    @endforeach
                 </div>
             </div>
         </aside>

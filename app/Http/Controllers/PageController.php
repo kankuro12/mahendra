@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Department;
+use App\Models\Event;
+use App\Models\LeadershipMessage;
+use App\Models\Notice;
 
 class PageController extends Controller
 {
     public function home()
     {
-        return view('home');
+        $events = Event::orderBy('event_date')->take(2)->get();
+        $notices = Notice::orderBy('published_at', 'desc')->take(2)->get();
+        $principalMessage = LeadershipMessage::where('slug', 'principal')->first();
+
+        return view('home', compact('events', 'notices', 'principalMessage'));
     }
 
     public function about()
@@ -18,7 +25,9 @@ class PageController extends Controller
 
     public function notice()
     {
-        return view('notice');
+        $notices = Notice::orderBy('published_at', 'desc')->get();
+
+        return view('notice', compact('notices'));
     }
 
     public function alumni()
@@ -28,7 +37,9 @@ class PageController extends Controller
 
     public function teachers()
     {
-        return view('teachers');
+        $departments = Department::with('teachers')->orderBy('sort_order')->get();
+
+        return view('teachers', compact('departments'));
     }
 
     public function contact()

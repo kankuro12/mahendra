@@ -58,52 +58,27 @@
                                 class="material-symbols-outlined text-sm">event</span></a>
                     </div>
                     <div class="space-y-6">
-                        <!-- Event 1 -->
+                        @foreach($events as $event)
                         <div
                             class="flex gap-6 group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all">
                             <div
                                 class="flex-shrink-0 w-20 h-24 bg-primary text-white flex flex-col items-center justify-center rounded-lg">
-                                <span class="text-2xl font-bold">15</span>
-                                <span class="text-xs uppercase font-bold">OCT</span>
+                                <span class="text-2xl font-bold">{{ $event['event_date']->format('d') }}</span>
+                                <span class="text-xs uppercase font-bold">{{ $event['event_date']->format('M') }}</span>
                             </div>
                             <div class="space-y-1">
-                                <span class="text-secondary text-xs font-bold uppercase tracking-wider">Academic</span>
-                                <h4 class="font-bold text-lg group-hover:text-primary transition-colors">Annual Science and
-                                    Technology Fair 2024</h4>
-                                <p class="text-on-surface-variant text-sm line-clamp-1">Showcasing innovative projects from
-                                    Grade 8-12 students.</p>
+                                <span class="text-secondary text-xs font-bold uppercase tracking-wider">{{ $event['type'] }}</span>
+                                <h4 class="font-bold text-lg group-hover:text-primary transition-colors">{{ $event['title'] }}</h4>
+                                <p class="text-on-surface-variant text-sm line-clamp-1">{{ $event['description'] }}</p>
                                 <div class="flex items-center gap-4 text-xs text-outline pt-2">
                                     <span class="flex items-center gap-1"><span
-                                            class="material-symbols-outlined text-xs">schedule</span> 10:00 AM</span>
+                                            class="material-symbols-outlined text-xs">schedule</span> {{ \Carbon\Carbon::parse($event['starts_at'])->format('h:i A') }}</span>
                                     <span class="flex items-center gap-1"><span
-                                            class="material-symbols-outlined text-xs">location_on</span> Main
-                                        Auditorium</span>
+                                            class="material-symbols-outlined text-xs">location_on</span> {{ $event['location'] }}</span>
                                 </div>
                             </div>
                         </div>
-                        <!-- Event 2 -->
-                        <div
-                            class="flex gap-6 group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all">
-                            <div
-                                class="flex-shrink-0 w-20 h-24 bg-secondary text-white flex flex-col items-center justify-center rounded-lg">
-                                <span class="text-2xl font-bold">22</span>
-                                <span class="text-xs uppercase font-bold">OCT</span>
-                            </div>
-                            <div class="space-y-1">
-                                <span class="text-secondary text-xs font-bold uppercase tracking-wider">Social</span>
-                                <h4 class="font-bold text-lg group-hover:text-primary transition-colors">Parent-Teacher
-                                    Conference (Term 2)</h4>
-                                <p class="text-on-surface-variant text-sm line-clamp-1">One-on-one sessions to discuss
-                                    student progress and goals.</p>
-                                <div class="flex items-center gap-4 text-xs text-outline pt-2">
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-symbols-outlined text-xs">schedule</span> 08:00 AM</span>
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-symbols-outlined text-xs">location_on</span> Classroom Block
-                                        B</span>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <!-- Recent Announcements Column -->
@@ -114,29 +89,20 @@
                                 class="material-symbols-outlined text-sm">archive</span></a>
                     </div>
                     <div class="space-y-4">
-                        <!-- Notice 1 -->
+                        @foreach($notices as $notice)
                         <div
-                            class="bg-surface-container-highest p-6 rounded-xl border-l-4 border-error relative overflow-hidden">
+                            class="{{ $notice['is_urgent'] ? 'bg-surface-container-highest border-l-4 border-error' : 'bg-white border-l-4 border-tertiary-container' }} p-6 rounded-xl relative overflow-hidden">
+                            @if($notice['is_urgent'])
                             <div class="absolute top-0 right-0 p-2">
                                 <span
                                     class="bg-error text-white text-[10px] px-2 py-0.5 rounded-full font-bold">URGENT</span>
                             </div>
-                            <span class="text-xs font-bold text-outline">Published: Oct 02, 2024</span>
-                            <h4 class="font-bold text-lg mt-1 mb-2">Winter Uniform Regulations Update</h4>
-                            <p class="text-on-surface-variant text-sm">All students are required to transition to full
-                                winter uniforms by November 1st. Please visit the store...</p>
-                            <a class="inline-block mt-4 text-primary font-bold text-sm underline" href="#">Download
-                                PDF (450KB)</a>
+                            @endif
+                            <span class="text-xs font-bold text-outline">Published: {{ $notice['published_at']->format('M d, Y') }}</span>
+                            <h4 class="font-bold text-lg mt-1 mb-2">{{ $notice['title'] }}</h4>
+                            <p class="text-on-surface-variant text-sm">{{ Str::limit($notice['content'], 100) }}</p>
                         </div>
-                        <!-- Notice 2 -->
-                        <div class="bg-white p-6 rounded-xl border-l-4 border-tertiary-container">
-                            <span class="text-xs font-bold text-outline">Published: Sep 28, 2024</span>
-                            <h4 class="font-bold text-lg mt-1 mb-2">Scholarship Applications for Year 2025</h4>
-                            <p class="text-on-surface-variant text-sm">The Merit Scholarship portal is now open for
-                                students entering Grade 11. Apply before Oct 30th.</p>
-                            <a class="inline-block mt-4 text-primary font-bold text-sm underline" href="{{ route('contact') }}">View
-                                Application Process</a>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -146,40 +112,33 @@
     <section class="w-full py-24 bg-surface-bright">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
             <div class="flex flex-col md:flex-row items-center gap-16">
-                <div class="w-full md:w-1/2 relative">
-                    <div
-                        class="aspect-[4/5] bg-surface-container rounded-xl overflow-hidden shadow-xl ring-8 ring-white/50">
-                        <img class="w-full h-full object-cover"
-                            data-alt="A professional and warm portrait of a senior academic principal, a middle-aged man with a kind smile, wearing a traditional formal Nepali Dhaka topi and a sharp corporate suit. He is standing in a well-lit library filled with old leather-bound books. The photography is sharp with a soft background bokeh, emphasizing his authoritative yet approachable presence."
-                            src="{{ asset('assets/images/img_f6a683a3ba3a.jpg') }}" />
+                    <div class="w-full md:w-1/2 relative">
+                        <div
+                            class="aspect-[4/5] bg-surface-container rounded-xl overflow-hidden shadow-xl ring-8 ring-white/50">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A professional and warm portrait of a senior academic principal, a middle-aged man with a kind smile, wearing a traditional formal Nepali Dhaka topi and a sharp corporate suit. He is standing in a well-lit library filled with old leather-bound books. The photography is sharp with a soft background bokeh, emphasizing his authoritative yet approachable presence."
+                                src="{{ asset($principalMessage['image']) }}" />
+                        </div>
+                        <div
+                            class="absolute -bottom-6 -right-6 bg-primary text-white p-8 rounded-xl shadow-2xl hidden lg:block max-w-xs">
+                            <p class="font-body-md italic opacity-90">"{{ $principalMessage['teaser'] }}"</p>
+                        </div>
                     </div>
-                    <div
-                        class="absolute -bottom-6 -right-6 bg-primary text-white p-8 rounded-xl shadow-2xl hidden lg:block max-w-xs">
-                        <p class="font-body-md italic opacity-90">"Education is not just about books; it's about building
-                            character and fostering global citizenship."</p>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <span class="text-primary font-bold tracking-widest font-label-sm uppercase">Leadership Vision</span>
+                        <h2 class="font-display-lg text-headline-lg text-on-surface">Welcome to Our Academic Sanctuary</h2>
+                        <div class="w-20 h-1 bg-secondary rounded-full"></div>
+                        @foreach($principalMessage['paragraphs'] as $para)
+                        <p class="text-on-surface-variant text-lg leading-relaxed">{{ $para }}</p>
+                        @endforeach
+                        <div class="pt-4">
+                            <h4 class="font-bold text-on-surface text-xl">{{ $principalMessage['author'] }}</h4>
+                            <p class="text-primary font-medium">{{ $principalMessage['role'] }}, Mahendra Secondary School</p>
+                        </div>
+                        <a href="{{ route('message-detail', ['slug' => 'principal']) }}"
+                            class="mt-6 inline-block border-2 border-primary text-primary px-8 py-3 rounded-lg font-bold hover:bg-primary hover:text-white transition-all text-center">Read
+                            Full Message</a>
                     </div>
-                </div>
-                <div class="w-full md:w-1/2 space-y-6">
-                    <span class="text-primary font-bold tracking-widest font-label-sm uppercase">Leadership Vision</span>
-                    <h2 class="font-display-lg text-headline-lg text-on-surface">Welcome to Our Academic Sanctuary</h2>
-                    <div class="w-20 h-1 bg-secondary rounded-full"></div>
-                    <p class="text-on-surface-variant text-lg leading-relaxed">
-                        At Mahendra Secondary School, we are committed to nurturing the potential of every student through a
-                        balanced curriculum that emphasizes both intellectual growth and practical skills. For over six
-                        decades, our institution has been at the forefront of educational innovation in Nepal.
-                    </p>
-                    <p class="text-on-surface-variant text-lg leading-relaxed">
-                        We invite you to explore our campus and discover the vibrant community that makes our school a
-                        premier destination for secondary education.
-                    </p>
-                    <div class="pt-4">
-                        <h4 class="font-bold text-on-surface text-xl">Dr. Hemanta Raj Joshi</h4>
-                        <p class="text-primary font-medium">Principal, Mahendra Secondary School</p>
-                    </div>
-                    <a href="{{ route('message-detail', ['slug' => 'principal']) }}"
-                        class="mt-6 inline-block border-2 border-primary text-primary px-8 py-3 rounded-lg font-bold hover:bg-primary hover:text-white transition-all text-center">Read
-                        Full Message</a>
-                </div>
             </div>
         </div>
     </section>

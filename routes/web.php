@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PageController;
+use Illuminate\Support\Facades\Route;
 
 // Static Pages
 Route::get('/', [PageController::class, 'home'])->name('home');

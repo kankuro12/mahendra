@@ -42,129 +42,42 @@
 <th class="px-6 py-4 font-label-md text-label-md text-on-surface uppercase tracking-wider text-center">Action</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-outline-variant">
-<!-- Notice 1 -->
-<tr class="notice-row hover:bg-surface-bright transition-colors group">
-<td class="px-6 py-5 whitespace-nowrap">
-<div class="flex flex-col">
-<span class="text-on-surface font-semibold">Oct 24</span>
-<span class="text-on-surface-variant text-label-sm">2024</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-weight="fill">campaign</span>
-<p class="text-on-surface font-medium line-clamp-1">Annual Examination Schedule for Grades 8-10 (2024)</p>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">Exam</span>
-</td>
-<td class="px-6 py-5 text-center">
-<button class="download-btn w-10 h-10 inline-flex items-center justify-center rounded-full text-primary border border-primary hover:bg-primary hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined">picture_as_pdf</span>
-</button>
-</td>
-</tr>
-<!-- Notice 2 -->
-<tr class="notice-row hover:bg-surface-bright transition-colors">
-<td class="px-6 py-5 whitespace-nowrap">
-<div class="flex flex-col">
-<span class="text-on-surface font-semibold">Oct 20</span>
-<span class="text-on-surface-variant text-label-sm">2024</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-weight="fill">school</span>
-<p class="text-on-surface font-medium line-clamp-1">Class 11 Science Stream Admission Merit List - Phase 2</p>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed">Admission</span>
-</td>
-<td class="px-6 py-5 text-center">
-<button class="download-btn w-10 h-10 inline-flex items-center justify-center rounded-full text-primary border border-primary hover:bg-primary hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Notice 3 -->
-<tr class="notice-row hover:bg-surface-bright transition-colors">
-<td class="px-6 py-5 whitespace-nowrap">
-<div class="flex flex-col">
-<span class="text-on-surface font-semibold">Oct 15</span>
-<span class="text-on-surface-variant text-label-sm">2024</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-weight="fill">celebration</span>
-<p class="text-on-surface font-medium line-clamp-1">Notice regarding Dashain and Tihar Festival Holidays</p>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-container text-on-error-container">Holiday</span>
-</td>
-<td class="px-6 py-5 text-center">
-<button class="download-btn w-10 h-10 inline-flex items-center justify-center rounded-full text-primary border border-primary hover:bg-primary hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined">picture_as_pdf</span>
-</button>
-</td>
-</tr>
-<!-- Notice 4 -->
-<tr class="notice-row hover:bg-surface-bright transition-colors">
-<td class="px-6 py-5 whitespace-nowrap">
-<div class="flex flex-col">
-<span class="text-on-surface font-semibold">Oct 12</span>
-<span class="text-on-surface-variant text-label-sm">2024</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-weight="fill">sports_basketball</span>
-<p class="text-on-surface font-medium line-clamp-1">Inter-School Volleyball Tournament Selection Trials</p>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container-highest text-on-surface">Event</span>
-</td>
-<td class="px-6 py-5 text-center">
-<button class="download-btn w-10 h-10 inline-flex items-center justify-center rounded-full text-primary border border-primary hover:bg-primary hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined">picture_as_pdf</span>
-</button>
-</td>
-</tr>
-<!-- Notice 5 -->
-<tr class="notice-row hover:bg-surface-bright transition-colors">
-<td class="px-6 py-5 whitespace-nowrap">
-<div class="flex flex-col">
-<span class="text-on-surface font-semibold">Oct 05</span>
-<span class="text-on-surface-variant text-label-sm">2024</span>
-</div>
-</td>
-<td class="px-6 py-5">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-weight="fill">groups</span>
-<p class="text-on-surface font-medium line-clamp-1">Mandatory Parent-Teacher Meeting (PTM) for Grade 12</p>
-</div>
-</td>
-<td class="px-6 py-5">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">General</span>
-</td>
-<td class="px-6 py-5 text-center">
-<button class="download-btn w-10 h-10 inline-flex items-center justify-center rounded-full text-primary border border-primary hover:bg-primary hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined">visibility</span>
-</button>
-</td>
-</tr>
-</tbody>
+                    <tbody class="divide-y divide-outline-variant">
+                        @foreach($notices as $notice)
+                        <tr class="notice-row hover:bg-surface-bright transition-colors group">
+                            <td class="px-6 py-5 whitespace-nowrap">
+                                <div class="flex flex-col">
+                                    <span class="text-on-surface font-semibold">{{ $notice['published_at']->format('M d') }}</span>
+                                    <span class="text-on-surface-variant text-label-sm">{{ $notice['published_at']->format('Y') }}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary" data-weight="fill">campaign</span>
+                                    <p class="text-on-surface font-medium line-clamp-1">{{ $notice['title'] }}</p>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5">
+                                @if($notice['is_urgent'])
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-container text-on-error-container">Urgent</span>
+                                @else
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">Notice</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-5 text-center">
+                                <button class="download-btn w-10 h-10 inline-flex items-center justify-center rounded-full text-primary border border-primary hover:bg-primary hover:text-white transition-all duration-300">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
 </table>
 </div>
 </div>
 <!-- Pagination -->
 <div class="mt-8 flex items-center justify-between">
-<p class="text-on-surface-variant font-label-md text-label-md">Showing 1-10 of 48 notices</p>
+                    <p class="text-on-surface-variant font-label-md text-label-md">Showing {{ $notices->count() }} notice(s)</p>
 <div class="flex gap-2">
 <button class="px-4 py-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
 <button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-bold">1</button>
@@ -182,30 +95,16 @@
 <span class="material-symbols-outlined" data-weight="fill">new_releases</span>
 <h3 class="font-headline-md text-headline-md font-bold">Latest Updates</h3>
 </div>
-<ul class="space-y-4">
-<li>
-<a class="group block border-l-2 border-primary pl-4 py-1 hover:bg-surface-bright transition-colors rounded-r-lg" href="#">
-<span class="block text-xs text-on-surface-variant font-semibold">2 hours ago</span>
-<p class="text-on-surface font-medium group-hover:text-primary transition-colors">Emergency Notice: School closed due to local administrative orders.</p>
-</a>
-</li>
-<li>
-<a class="group block border-l-2 border-outline pl-4 py-1 hover:bg-surface-bright transition-colors rounded-r-lg" href="#">
-<span class="block text-xs text-on-surface-variant font-semibold">1 day ago</span>
-<p class="text-on-surface font-medium group-hover:text-primary transition-colors">Revised Syllabus for Computer Science (Grade 11).</p>
-</a>
-</li>
-<li>
-<a class="group block border-l-2 border-outline pl-4 py-1 hover:bg-surface-bright transition-colors rounded-r-lg" href="#">
-<span class="block text-xs text-on-surface-variant font-semibold">2 days ago</span>
-<p class="text-on-surface font-medium group-hover:text-primary transition-colors">Staff meeting regarding national education policy changes.</p>
-</a>
-</li>
-</ul>
-<a class="mt-6 inline-flex items-center gap-2 text-primary font-bold hover:underline" href="#">
-                        View all updates
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
+                    <ul class="space-y-4">
+                        @foreach($notices->take(5) as $notice)
+                        <li>
+                            <a class="group block border-l-2 {{ $notice['is_urgent'] ? 'border-primary' : 'border-outline' }} pl-4 py-1 hover:bg-surface-bright transition-colors rounded-r-lg" href="#">
+                                <span class="block text-xs text-on-surface-variant font-semibold">{{ $notice['published_at']->diffForHumans() }}</span>
+                                <p class="text-on-surface font-medium group-hover:text-primary transition-colors">{{ Str::limit($notice['title'], 60) }}</p>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
 </div>
 <!-- Archive Sidebar -->
 <div class="bg-surface-container p-6 rounded-xl border border-outline-variant">
