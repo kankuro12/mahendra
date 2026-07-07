@@ -1,5 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\AlbumController as AdminAlbumController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DepartmentController as AdminDepartmentController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\FacilityController as AdminFacilityController;
+use App\Http\Controllers\Admin\LeadershipMessageController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\NoticeController as AdminNoticeController;
+use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MessageController;
@@ -31,3 +40,24 @@ Route::get('/gallery/{slug}', [GalleryController::class, 'show'])->name('gallery
 // Leadership Messages
 Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 Route::get('/messages/{slug}', [MessageController::class, 'show'])->name('message-detail');
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::middleware('admin')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('notices', AdminNoticeController::class);
+        Route::resource('facilities', AdminFacilityController::class);
+        Route::resource('albums', AdminAlbumController::class);
+        Route::resource('messages', LeadershipMessageController::class);
+        Route::resource('teachers', AdminTeacherController::class);
+        Route::resource('events', AdminEventController::class);
+        Route::resource('departments', AdminDepartmentController::class);
+
+        Route::delete('/albums/{album}/images/{index}', [AdminAlbumController::class, 'destroyImage'])->name('albums.images.destroy');
+    });
+});
