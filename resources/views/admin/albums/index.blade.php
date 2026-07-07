@@ -20,28 +20,32 @@
             <table class="data-table w-full">
                 <thead>
                     <tr>
+                        <th>Poster</th>
                         <th>Title</th>
                         <th>Date</th>
-                        <th>Images</th>
-                        <th>YouTube</th>
-                        <th width="120">Actions</th>
+                        <th>Items</th>
+                        <th width="180">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($albums as $album)
+                        @php $poster = $album->poster ?? ($album->items->first()?->photopath); @endphp
                         <tr>
-                            <td class="font-medium text-gray-900">{{ $album->title }}</td>
-                            <td class="text-sm">{{ $album->date ? \Carbon\Carbon::parse($album->date)->format('M d, Y') : '--' }}</td>
-                            <td class="text-sm">{{ is_countable($album->images) ? count($album->images) : 0 }} images</td>
                             <td>
-                                @if ($album->youtube)
-                                    <span class="text-xs text-gray-500">Yes</span>
+                                @if ($poster)
+                                    <img src="{{ asset(str_starts_with($poster, 'albums/') ? 'storage/' . $poster : $poster) }}" class="w-14 h-10 rounded object-cover">
                                 @else
-                                    <span class="text-gray-400 text-xs">--</span>
+                                    <span class="text-gray-300 text-xs">--</span>
                                 @endif
                             </td>
+                            <td class="font-medium text-gray-900">{{ $album->title }}</td>
+                            <td class="text-sm">{{ $album->date ? \Carbon\Carbon::parse($album->date)->format('M d, Y') : '--' }}</td>
+                            <td class="text-sm">{{ $album->items_count }} items</td>
                             <td>
                                 <div class="flex items-center gap-1">
+                                    <a href="{{ route('admin.albums.items.index', $album) }}" class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-green-600" title="Manage Items">
+                                        <span class="material-symbols-outlined text-[18px]">grid_view</span>
+                                    </a>
                                     <a href="{{ route('admin.albums.edit', $album) }}" class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-[#b1002c]">
                                         <span class="material-symbols-outlined text-[18px]">edit</span>
                                     </a>
@@ -61,18 +65,19 @@
 
         <div id="cardView" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             @forelse ($albums as $album)
+                @php $poster = $album->poster ?? ($album->items->first()?->photopath); @endphp
                 <div class="card-item bg-white border border-gray-200 rounded-xl p-4">
-                    @php $firstImage = is_array($album->images) && count($album->images) > 0 ? $album->images[0] : null; @endphp
-                    @if ($firstImage)
-                        <img src="{{ asset('storage/' . $firstImage) }}" class="w-full h-36 rounded-lg object-cover mb-3">
+                    @if ($poster)
+                        <img src="{{ asset(str_starts_with($poster, 'albums/') ? 'storage/' . $poster : $poster) }}" class="w-full h-36 rounded-lg object-cover mb-3">
                     @else
                         <div class="w-full h-36 rounded-lg bg-gray-100 flex items-center justify-center mb-3">
                             <span class="material-symbols-outlined text-3xl text-gray-300">photo_library</span>
                         </div>
                     @endif
                     <h4 class="font-medium text-gray-900 text-sm mb-1">{{ $album->title }}</h4>
-                    <p class="text-xs text-gray-400">{{ is_countable($album->images) ? count($album->images) : 0 }} images</p>
+                    <p class="text-xs text-gray-400">{{ $album->items_count }} items</p>
                     <div class="flex items-center gap-2 mt-2">
+                        <a href="{{ route('admin.albums.items.index', $album) }}" class="px-3 py-1.5 bg-green-50 text-green-600 rounded-lg text-xs hover:bg-green-100">Items</a>
                         <a href="{{ route('admin.albums.edit', $album) }}" class="px-3 py-1.5 bg-gray-50 text-gray-600 rounded-lg text-xs hover:bg-gray-100">Edit</a>
                         <form method="POST" action="{{ route('admin.albums.destroy', $album) }}" class="inline">
                             @csrf @method('DELETE')

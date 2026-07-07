@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController as AdminDepartmentController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\FacilityController as AdminFacilityController;
+use App\Http\Controllers\Admin\GalleryItemController;
 use App\Http\Controllers\Admin\LeadershipMessageController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NoticeController as AdminNoticeController;
@@ -51,6 +52,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('notices', AdminNoticeController::class);
+
+        Route::prefix('albums/{album}/items')->name('albums.items.')->group(function () {
+            Route::get('/', [GalleryItemController::class, 'index'])->name('index');
+            Route::get('/create', [GalleryItemController::class, 'create'])->name('create');
+            Route::post('/', [GalleryItemController::class, 'store'])->name('store');
+            Route::get('/{item}/edit', [GalleryItemController::class, 'edit'])->name('edit');
+            Route::put('/{item}', [GalleryItemController::class, 'update'])->name('update');
+            Route::delete('/{item}', [GalleryItemController::class, 'destroy'])->name('destroy');
+        });
         Route::resource('facilities', AdminFacilityController::class);
         Route::resource('albums', AdminAlbumController::class);
         Route::resource('messages', LeadershipMessageController::class);
@@ -58,6 +68,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('events', AdminEventController::class);
         Route::resource('departments', AdminDepartmentController::class);
 
-        Route::delete('/albums/{album}/images/{index}', [AdminAlbumController::class, 'destroyImage'])->name('albums.images.destroy');
     });
 });

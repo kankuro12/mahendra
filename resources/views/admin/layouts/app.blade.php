@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/dropify/dropify.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/summernote/summernote-bs5.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin/vendor/datatables/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css') }}">
     @stack('styles')
 </head>
@@ -104,10 +104,10 @@
 
     <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden max-lg:block"></div>
 
-    <script src="{{ asset('assets/admin/vendor/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/dropify/dropify.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/summernote/summernote-bs5.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
     @stack('scripts')
 </body>

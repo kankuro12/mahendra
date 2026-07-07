@@ -14,7 +14,7 @@ class AlbumController extends Controller
     public function index(): View
     {
         return view('admin.albums.index', [
-            'albums' => Album::latest()->get(),
+            'albums' => Album::withCount('items')->latest()->get(),
         ]);
     }
 
@@ -29,21 +29,14 @@ class AlbumController extends Controller
             'title' => 'required|max:255',
             'description' => 'nullable',
             'date' => 'nullable|date',
-            'youtube' => 'nullable|max:255',
-            'images' => 'required',
-            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
+            'poster' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
         $data['slug'] = Str::slug($data['title']);
-        $imagePaths = [];
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('albums', 'public');
-            }
+        if ($request->hasFile('poster')) {
+            $data['poster'] = $request->file('poster')->store('albums', 'public');
         }
-
-        $data['images'] = $imagePaths;
 
         Album::create($data);
 
@@ -61,21 +54,14 @@ class AlbumController extends Controller
             'title' => 'required|max:255',
             'description' => 'nullable',
             'date' => 'nullable|date',
-            'youtube' => 'nullable|max:255',
-            'images' => 'nullable',
-            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
+            'poster' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
         $data['slug'] = Str::slug($data['title']);
-        $imagePaths = $album->images ?? [];
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('albums', 'public');
-            }
+        if ($request->hasFile('poster')) {
+            $data['poster'] = $request->file('poster')->store('albums', 'public');
         }
-
-        $data['images'] = $imagePaths;
 
         $album->update($data);
 
@@ -87,16 +73,5 @@ class AlbumController extends Controller
         $album->delete();
 
         return redirect()->route('admin.albums.index')->with('success', 'Album deleted successfully.');
-    }
-
-    public function destroyImage(Album $album, $index): RedirectResponse
-    {
-        $images = $album->images ?? [];
-        if (isset($images[$index])) {
-            unset($images[$index]);
-            $album->update(['images' => array_values($images)]);
-        }
-
-        return back()->with('success', 'Image removed successfully.');
     }
 }

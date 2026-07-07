@@ -39,10 +39,20 @@
 <!-- Album Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
 @foreach($albums as $album)
+@php
+    $poster = $album->poster ?? ($album->items->first()?->photopath);
+    $itemCount = $album->items->count();
+@endphp
 <a href="{{ route('gallery-detail', ['slug' => $album['slug']]) }}" class="album-card group cursor-pointer relative overflow-hidden rounded-xl bg-white border border-outline-variant shadow-sm transition-all duration-300 hover:shadow-lg flex flex-col justify-between">
     <div>
         <div class="aspect-[16/10] overflow-hidden">
-            <img class="w-full h-full object-cover transition-transform duration-500" src="{{ asset($album['images'][0]) }}" alt="{{ $album['title'] }}"/>
+            @if ($poster)
+                <img class="w-full h-full object-cover transition-transform duration-500" src="{{ asset(str_starts_with($poster, 'albums/') ? 'storage/' . $poster : $poster) }}" alt="{{ $album['title'] }}"/>
+            @else
+                <div class="w-full h-full bg-surface-dim flex items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline">photo_library</span>
+                </div>
+            @endif
         </div>
         <div class="p-6">
             <div class="flex justify-between items-start mb-2 gap-4">
@@ -54,10 +64,7 @@
     </div>
     <div class="p-6 pt-0 flex items-center justify-between border-t border-outline-variant/50 mt-4">
         <div class="flex items-center gap-4 text-on-surface-variant text-label-md">
-            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">photo_library</span> {{ count($album['images']) }} Photos</span>
-            @if($album['youtube'])
-            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">videocam</span> 1 Video</span>
-            @endif
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">photo_library</span> {{ $itemCount }} Photo{{ $itemCount !== 1 ? 's' : '' }}</span>
         </div>
         <span class="text-primary font-bold text-sm flex items-center gap-1">Open Album <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
     </div>

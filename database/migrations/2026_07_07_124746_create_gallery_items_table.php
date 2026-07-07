@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('gallery_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('album_id')->constrained()->cascadeOnDelete();
+            $table->string('photopath')->nullable();
+            $table->string('youtube_link')->nullable();
+            $table->enum('type', ['image', 'youtube'])->default('image');
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('gallery_items');

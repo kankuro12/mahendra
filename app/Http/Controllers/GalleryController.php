@@ -8,14 +8,14 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        $albums = Album::all();
+        $albums = Album::with('items')->get();
 
         return view('gallery', compact('albums'));
     }
 
     public function show(string $slug)
     {
-        $album = Album::where('slug', $slug)->firstOrFail();
+        $album = Album::where('slug', $slug)->with('items')->firstOrFail();
 
         return view('gallery-detail', compact('album'));
     }

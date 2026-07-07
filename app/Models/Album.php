@@ -5,18 +5,17 @@ namespace App\Models;
 use Database\Factories\AlbumFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Album extends Model
 {
     /** @use HasFactory<AlbumFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'description', 'date', 'youtube', 'images'];
+    protected $fillable = ['title', 'slug', 'poster', 'description', 'date'];
 
-    protected function casts(): array
+    public function items(): HasMany
     {
-        return [
-            'images' => 'array',
-        ];
+        return $this->hasMany(GalleryItem::class)->orderBy('sort_order');
     }
 }

@@ -31,39 +31,40 @@
         </p>
     </div>
 
-    <!-- YouTube Video (If available) -->
-    @if($album['youtube'])
-    <div class="mb-16 space-y-6">
-        <h3 class="font-headline-md text-xl font-bold text-on-surface flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary">video_library</span> Video Highlights
-        </h3>
-        <div class="max-w-4xl mx-auto aspect-[16/9] rounded-2xl overflow-hidden shadow-lg border border-outline-variant">
-            <iframe class="w-full h-full" src="{{ $album['youtube'] }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-    </div>
-    @endif
-
-    <!-- Image Grid -->
-    <div class="space-y-6">
-        <h3 class="font-headline-md text-xl font-bold text-on-surface flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary">photo_library</span> Photo Album ({{ count($album['images']) }} Photos)
-        </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-gutter">
-            @foreach($album['images'] as $img)
-            <div class="group cursor-pointer rounded-xl overflow-hidden border border-outline-variant shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative" onclick="openLightbox('{{ asset($img) }}')">
-                <div class="aspect-[4/3] overflow-hidden bg-surface-dim">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ asset($img) }}" alt="Gallery Image">
-                </div>
-                <!-- Hover magnifying glass overlay -->
-                <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div class="bg-white/95 p-3 rounded-full shadow-lg">
-                        <span class="material-symbols-outlined text-primary text-xl">zoom_in</span>
-                    </div>
-                </div>
+    <!-- Gallery Items -->
+    @php $items = $album->items; @endphp
+    @if ($items->count())
+        <div class="space-y-6">
+            <h3 class="font-headline-md text-xl font-bold text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">photo_library</span> Gallery ({{ $items->count() }} {{ Str::plural('item', $items->count()) }})
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-gutter">
+                @foreach ($items as $item)
+                    @if ($item->type === 'image' && $item->photopath)
+                        <div class="group cursor-pointer rounded-xl overflow-hidden border border-outline-variant shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative" onclick="openLightbox('{{ asset('storage/' . $item->photopath) }}')">
+                            <div class="aspect-[4/3] overflow-hidden bg-surface-dim">
+                                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="{{ asset('storage/' . $item->photopath) }}" alt="Gallery Image">
+                            </div>
+                            <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <div class="bg-white/95 p-3 rounded-full shadow-lg">
+                                    <span class="material-symbols-outlined text-primary text-xl">zoom_in</span>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif ($item->type === 'youtube' && $item->youtube_link)
+                        <div class="rounded-xl overflow-hidden border border-outline-variant shadow-sm aspect-[16/9]">
+                            <iframe class="w-full h-full" src="{{ $item->youtube_link }}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                    @endif
+                @endforeach
             </div>
-            @endforeach
         </div>
-    </div>
+    @else
+        <div class="text-center py-16 text-on-surface-variant">
+            <span class="material-symbols-outlined text-5xl block mb-3">photo_library</span>
+            <p>No items in this album yet.</p>
+        </div>
+    @endif
 </main>
 
 <!-- Lightbox Modal -->
@@ -97,7 +98,6 @@ function closeLightbox() {
     }
 }
 
-// Close lightbox on pressing Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeLightbox();
