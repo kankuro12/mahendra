@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LeadershipMessageController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NoticeController as AdminNoticeController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
+use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MessageController;
@@ -50,6 +51,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::post('/upload-image', [UploadController::class, 'image'])->name('upload.image');
 
         Route::resource('notices', AdminNoticeController::class);
 

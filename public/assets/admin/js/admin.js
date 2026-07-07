@@ -41,7 +41,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+            ],
+            callbacks: {
+                onImageUpload: function (files) {
+                    if (!window.adminUploadUrl) return;
+                    var editor = this;
+                    var formData = new FormData();
+                    formData.append('image', files[0]);
+                    formData.append('_token', window.adminCsrfToken);
+
+                    $.ajax({
+                        url: window.adminUploadUrl,
+                        method: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            $(editor).summernote('insertImage', res.url);
+                        },
+                        error: function () {
+                            alert('Image upload failed.');
+                        }
+                    });
+                }
+            }
         });
     }
 

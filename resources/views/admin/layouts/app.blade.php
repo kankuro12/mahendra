@@ -104,6 +104,10 @@
 
     <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden max-lg:block"></div>
 
+    <script>
+        window.adminCsrfToken = '{{ csrf_token() }}';
+        window.adminUploadUrl = '{{ route("admin.upload.image") }}';
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
