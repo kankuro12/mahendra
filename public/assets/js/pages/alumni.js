@@ -1,0 +1,1 @@
+// Redundant scroll logic removed, handled globally
