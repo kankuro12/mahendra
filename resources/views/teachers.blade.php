@@ -86,54 +86,7 @@
             </div>
         </div>
     </section>
-    <!-- Footer -->
-    <footer class="bg-surface-container-highest border-t border-outline-variant">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter py-12 px-gutter w-full max-w-container-max mx-auto">
-            <div class="space-y-4">
-                <div class="font-headline-md text-headline-md font-bold text-primary">Mahendra Secondary</div>
-                <p class="text-on-surface-variant font-body-md text-body-md">
-                    Leading the community in academic excellence and civic responsibility since 1974.
-                </p>
-            </div>
-            <div>
-                <h4 class="font-label-md text-label-md font-bold mb-6 uppercase tracking-wider text-on-surface">Academic
-                    Links</h4>
-                <ul class="space-y-3 font-label-sm text-label-sm text-on-surface-variant">
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Curriculum</a></li>
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Admissions</a></li>
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Library</a></li>
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Research</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-label-md text-label-md font-bold mb-6 uppercase tracking-wider text-on-surface">Resources
-                </h4>
-                <ul class="space-y-3 font-label-sm text-label-sm text-on-surface-variant">
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Campus Map</a></li>
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Staff Portal</a></li>
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Privacy Policy</a></li>
-                    <li><a class="hover:underline hover:text-primary transition-all" href="#">Terms of Service</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-label-md text-label-md font-bold mb-6 uppercase tracking-wider text-on-surface">Connect</h4>
-                <div class="flex gap-4">
-                    <a class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all"
-                        href="#">
-                        <span class="material-symbols-outlined">face_nod</span>
-                    </a>
-                    <a class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all"
-                        href="#">
-                        <span class="material-symbols-outlined">alternate_email</span>
-                    </a>
-                </div>
-                <p class="mt-6 text-on-surface-variant font-label-sm text-label-sm">
-                    © 2024 Mahendra Secondary School. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
+
 @endsection
 
 @push('scripts')

@@ -104,7 +104,9 @@
 <body class="@yield('body-class', 'bg-background text-on-background font-body-md text-body-md overflow-x-hidden')">
     @include('layouts.navigation')
     @yield('content')
-    
+
+    @include('partials.footer')
+
     <script src="{{ asset('assets/js/global.js') }}" defer></script>
     @stack('scripts')
 </body>

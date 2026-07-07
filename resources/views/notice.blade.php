@@ -153,56 +153,6 @@
 </aside>
 </div>
 </main>
-<!-- Footer -->
-<footer class="w-full bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline">
-<div class="w-full py-12 px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
-<div class="col-span-1 md:col-span-1">
-<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed mb-4">Mahendra School</h2>
-<p class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant mb-6">Empowering minds through quality education and discipline since 1956. A leading government-affiliated institution.</p>
-<div class="flex gap-4">
-<a class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white hover:brightness-110 transition-all" href="#"><span class="material-symbols-outlined text-sm">public</span></a>
-<a class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white hover:brightness-110 transition-all" href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
-<a class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white hover:brightness-110 transition-all" href="#"><span class="material-symbols-outlined text-sm">share</span></a>
-</div>
-</div>
-<div>
-<h4 class="font-label-md text-label-md font-bold text-on-surface mb-6 uppercase tracking-widest">Resources</h4>
-<ul class="space-y-3 font-body-md text-body-md text-on-surface-variant dark:text-surface-variant">
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="{{ route('notice') }}">Academic Calendar</a></li>
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="{{ route('teachers') }}">Staff Directory</a></li>
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="#">Student Portal</a></li>
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="#">Admission Help</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-label-md text-label-md font-bold text-on-surface mb-6 uppercase tracking-widest">Institution</h4>
-<ul class="space-y-3 font-body-md text-body-md text-on-surface-variant dark:text-surface-variant">
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="#">Privacy Policy</a></li>
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="#">Tenders</a></li>
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="#">School Constitution</a></li>
-<li><a class="hover:text-primary dark:hover:text-primary-fixed hover:underline transition-all" href="{{ route('contact') }}">Contact Us</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-label-md text-label-md font-bold text-on-surface mb-6 uppercase tracking-widest">Quick Apply</h4>
-<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant">
-<p class="text-label-sm text-on-surface-variant mb-3">Subscribe for the latest notices sent to your email.</p>
-<div class="flex flex-col gap-2">
-<input class="w-full px-3 py-2 border border-outline-variant rounded bg-white text-sm" placeholder="Email Address" type="email"/>
-<button class="bg-primary text-on-primary py-2 rounded font-bold text-sm hover:brightness-110 transition-all">Subscribe</button>
-</div>
-</div>
-</div>
-<div class="col-span-full mt-12 pt-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant">© 2024 Mahendra Secondary School. Affiliated with the Government of Nepal.</p>
-<div class="flex gap-6">
-<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Sitemap</a>
-</div>
-</div>
-</div>
-</footer>
-<!-- Micro-interaction Scripts -->
 @endsection
 
 @push('scripts')

@@ -79,58 +79,6 @@
 </button>
 </div>
 </main>
-<!-- Footer -->
-<footer class="bg-surface-container-highest w-full border-t border-outline-variant">
-<div class="py-12 px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
-<div class="col-span-1 md:col-span-1">
-<span class="font-headline-md text-headline-md font-bold text-primary mb-4 block">Mahendra Secondary School</span>
-<p class="text-on-surface-variant text-body-md mb-6">Nurturing minds, building futures. Committed to academic excellence since 1995.</p>
-<div class="flex gap-4">
-<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">face_nod</span>
-<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">language</span>
-<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">public</span>
-</div>
-</div>
-<div>
-<h4 class="font-bold text-on-surface mb-4">Quick Links</h4>
-<ul class="space-y-2 text-label-md">
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ route('notice') }}">Academic Calendar</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ route('teachers') }}">Staff Directory</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Admission Info</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">School News</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-bold text-on-surface mb-4">Legal & Support</h4>
-<ul class="space-y-2 text-label-md">
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Tenders</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="{{ route('contact') }}">Contact Support</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Use</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-bold text-on-surface mb-4">Contact Information</h4>
-<ul class="space-y-3 text-label-md text-on-surface-variant">
-<li class="flex gap-2">
-<span class="material-symbols-outlined text-primary">location_on</span>
-<span>123 School Road, Kathmandu, Nepal</span>
-</li>
-<li class="flex gap-2">
-<span class="material-symbols-outlined text-primary">call</span>
-<span>+977 01 444 555</span>
-</li>
-<li class="flex gap-2">
-<span class="material-symbols-outlined text-primary">mail</span>
-<span>info@mahendraschool.edu.np</span>
-</li>
-</ul>
-</div>
-<div class="col-span-1 md:col-span-4 pt-8 mt-8 border-t border-outline-variant text-center">
-<p class="text-label-sm text-on-surface-variant">© 2024 Mahendra Secondary School. Affiliated with the Government of Nepal.</p>
-</div>
-</div>
-</footer>
 @endsection
 
 @push('scripts')

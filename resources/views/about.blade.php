@@ -199,50 +199,6 @@
 </div>
 </section>
 </main>
-<!-- Footer -->
-<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
-<div class="w-full py-12 px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
-<div class="col-span-1">
-<span class="font-headline-md text-headline-md font-bold text-primary mb-4 block">Mahendra Secondary School</span>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Dedicated to academic excellence and character building since 1956. Empowering students for a better tomorrow.</p>
-<div class="flex gap-4">
-<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">face_nod</span>
-<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">alternate_email</span>
-<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">language</span>
-</div>
-</div>
-<div>
-<h4 class="font-label-md text-label-md font-bold mb-6">Quick Links</h4>
-<ul class="space-y-4">
-<li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all duration-200" href="{{ route('notice') }}">Academic Calendar</a></li>
-<li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all duration-200" href="{{ route('teachers') }}">Staff Directory</a></li>
-<li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all duration-200" href="#">Privacy Policy</a></li>
-<li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all duration-200" href="#">Tenders</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-label-md text-label-md font-bold mb-6">Contact Info</h4>
-<ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex gap-3"><span class="material-symbols-outlined text-sm">location_on</span> Main Campus Road, Kathmandu, Nepal</li>
-<li class="flex gap-3"><span class="material-symbols-outlined text-sm">call</span> +977 1-4XXXXXX</li>
-<li class="flex gap-3"><span class="material-symbols-outlined text-sm">mail</span> contact@mahendra.edu.np</li>
-</ul>
-</div>
-<div>
-<h4 class="font-label-md text-label-md font-bold mb-6">Newsletter</h4>
-<p class="text-sm text-on-surface-variant mb-4">Stay updated with our latest notices and events.</p>
-<div class="flex gap-2">
-<input class="bg-surface-lowest border border-outline-variant px-4 py-2 rounded-lg w-full text-sm focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Email address" type="email"/>
-<button class="bg-primary text-on-primary px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
-<span class="material-symbols-outlined">send</span>
-</button>
-</div>
-</div>
-</div>
-<div class="border-t border-outline-variant py-8 px-margin-desktop text-center">
-<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2024 Mahendra Secondary School. Affiliated with the Government of Nepal.</p>
-</div>
-</footer>
 @endsection
 
 @push('scripts')

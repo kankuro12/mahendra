@@ -38,40 +38,4 @@
         </div>
     </div>
 </main>
-
-<!-- Footer section -->
-<footer class="bg-surface-container-highest w-full border-t border-outline-variant">
-    <div class="py-12 px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
-        <div class="col-span-1">
-            <span class="font-headline-md text-headline-md font-bold text-primary mb-4 block">Mahendra School</span>
-            <p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Dedicated to academic excellence and character building since 1956. Empowering students for a better tomorrow.</p>
-        </div>
-        <div>
-            <h4 class="font-label-md text-label-md font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-4">
-                <li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all" href="{{ route('notice') }}">Academic Calendar</a></li>
-                <li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all" href="{{ route('teachers') }}">Staff Directory</a></li>
-                <li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all" href="{{ route('gallery') }}">Gallery</a></li>
-                <li><a class="text-on-surface-variant font-medium hover:text-primary hover:underline transition-all" href="{{ route('contact') }}">Contact Us</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="font-label-md text-label-md font-bold mb-6">Contact Info</h4>
-            <ul class="space-y-4 text-sm text-on-surface-variant">
-                <li class="flex gap-3"><span class="material-symbols-outlined text-sm">location_on</span> Jhapa, Koshi Province, Nepal</li>
-                <li class="flex gap-3"><span class="material-symbols-outlined text-sm">call</span> +977-23-XXXXXX</li>
-                <li class="flex gap-3"><span class="material-symbols-outlined text-sm">mail</span> info@mahendraschool.edu.np</li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="font-label-md text-label-md font-bold mb-6">Find Us</h4>
-            <div class="rounded-lg overflow-hidden h-32 border border-outline-variant shadow-inner bg-surface-dim flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary text-4xl">map</span>
-            </div>
-        </div>
-    </div>
-    <div class="border-t border-outline-variant py-8 px-margin-desktop text-center">
-        <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2024 Mahendra Secondary School. Affiliated with the Government of Nepal.</p>
-    </div>
-</footer>
 @endsection

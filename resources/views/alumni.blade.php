@@ -230,60 +230,6 @@
 </div>
 </section>
 </main>
-<!-- Footer -->
-<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant pt-16 pb-8">
-<div class="max-w-container-max mx-auto px-gutter">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-<!-- Branding -->
-<div class="col-span-1 md:col-span-1">
-<div class="font-headline-md text-headline-md font-bold text-primary mb-4">Mahendra Secondary</div>
-<p class="text-on-surface-variant text-body-md">Empowering minds and building legacies since 1964. A community of excellence and tradition.</p>
-<div class="flex gap-4 mt-6">
-<a class="p-2 bg-white rounded-full text-primary hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">face_nod</span></a>
-<a class="p-2 bg-white rounded-full text-primary hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">language</span></a>
-<a class="p-2 bg-white rounded-full text-primary hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">mail</span></a>
-</div>
-</div>
-<!-- Quick Links -->
-<div>
-<h4 class="font-bold text-on-surface mb-6">Quick Links</h4>
-<ul class="space-y-4 text-on-surface-variant font-label-md">
-<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Campus Map</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Staff Portal</a></li>
-</ul>
-</div>
-<!-- Alumni Links -->
-<div>
-<h4 class="font-bold text-on-surface mb-6">Alumni Hub</h4>
-<ul class="space-y-4 text-on-surface-variant font-label-md">
-<li><a class="hover:text-primary transition-colors" href="#">Global Directory</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Career Mentorship</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Archive Photos</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Donation Portal</a></li>
-</ul>
-</div>
-<!-- Contact Info -->
-<div>
-<h4 class="font-bold text-on-surface mb-6">Contact Us</h4>
-<ul class="space-y-4 text-on-surface-variant font-label-md">
-<li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary">location_on</span> 123 Education Square, Central District</li>
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">phone</span> +977 1 4XXXXXX</li>
-<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">mail</span> alumni@mahendra.edu.np</li>
-</ul>
-</div>
-</div>
-<div class="border-t border-outline-variant pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-label-sm text-on-surface-variant">
-<p>© 2024 Mahendra Secondary School. All rights reserved.</p>
-<div class="flex gap-6">
-<a class="hover:underline" href="#">Student Privacy</a>
-<a class="hover:underline" href="#">Compliance</a>
-<a class="hover:underline" href="#">Accessibility</a>
-</div>
-</div>
-</div>
-</footer>
 @endsection
 
 @push('scripts')
