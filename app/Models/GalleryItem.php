@@ -16,4 +16,30 @@ class GalleryItem extends Model
     {
         return $this->belongsTo(Album::class);
     }
+
+    public function thumbnail(): ?string
+    {
+        if ($this->type === 'image' && $this->photopath) {
+            return asset('storage/'.$this->photopath);
+        }
+
+        if ($this->type === 'youtube' && $this->youtube_link) {
+            $id = $this->youtubeId();
+
+            return $id ? 'https://img.youtube.com/vi/'.$id.'/mqdefault.jpg' : null;
+        }
+
+        return null;
+    }
+
+    public function youtubeId(): ?string
+    {
+        if (! $this->youtube_link) {
+            return null;
+        }
+
+        preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $this->youtube_link, $m);
+
+        return $m[1] ?? null;
+    }
 }

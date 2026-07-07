@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\GalleryItem;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -19,64 +19,68 @@ class GalleryItemController extends Controller
         ]);
     }
 
-    public function create(Album $album): View
+    public function store(Request $request, Album $album): JsonResponse
     {
-        return view('admin.gallery-items.create', compact('album'));
-    }
+        if ($request->input('type') === 'youtube') {
+            $data = $request->validate([
+                'youtube_link' => 'required|string|max:255',
+                'sort_order' => 'nullable|integer',
+            ]);
 
-    public function store(Request $request, Album $album): RedirectResponse
-    {
-        $data = $request->validate([
-            'type' => 'required|in:image,youtube',
-            'photopath' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
-            'youtube_link' => 'nullable|string|max:255',
+            $item = GalleryItem::create([
+                'album_id' => $album->id,
+                'type' => 'youtube',
+                'youtube_link' => $data['youtube_link'],
+                'sort_order' => (int) ($data['sort_order'] ?? 0),
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'item' => $this->itemJson($item),
+            ]);
+        }
+
+        $request->validate([
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:10240',
             'sort_order' => 'nullable|integer',
         ]);
 
-        $data['album_id'] = $album->id;
+        $baseOrder = (int) ($request->input('sort_order', 0));
+        $items = [];
 
-        if ($request->hasFile('photopath')) {
-            $data['photopath'] = $request->file('photopath')->store('gallery-items', 'public');
+        foreach ($request->file('images') as $i => $file) {
+            $item = GalleryItem::create([
+                'album_id' => $album->id,
+                'type' => 'image',
+                'photopath' => $file->store('gallery-items', 'public'),
+                'sort_order' => $baseOrder + $i,
+            ]);
+
+            $items[] = $this->itemJson($item);
         }
 
-        GalleryItem::create($data);
-
-        return redirect()->route('admin.albums.items.index', $album)
-            ->with('success', 'Gallery item added successfully.');
-    }
-
-    public function edit(Album $album, GalleryItem $item): View
-    {
-        return view('admin.gallery-items.edit', [
-            'album' => $album,
-            'item' => $item,
+        return response()->json([
+            'success' => true,
+            'items' => $items,
         ]);
     }
 
-    public function update(Request $request, Album $album, GalleryItem $item): RedirectResponse
-    {
-        $data = $request->validate([
-            'type' => 'required|in:image,youtube',
-            'photopath' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
-            'youtube_link' => 'nullable|string|max:255',
-            'sort_order' => 'nullable|integer',
-        ]);
-
-        if ($request->hasFile('photopath')) {
-            $data['photopath'] = $request->file('photopath')->store('gallery-items', 'public');
-        }
-
-        $item->update($data);
-
-        return redirect()->route('admin.albums.items.index', $album)
-            ->with('success', 'Gallery item updated successfully.');
-    }
-
-    public function destroy(Album $album, GalleryItem $item): RedirectResponse
+    public function destroy(Album $album, GalleryItem $item): JsonResponse
     {
         $item->delete();
 
-        return redirect()->route('admin.albums.items.index', $album)
-            ->with('success', 'Gallery item removed.');
+        return response()->json(['success' => true]);
+    }
+
+    private function itemJson(GalleryItem $item): array
+    {
+        return [
+            'id' => $item->id,
+            'type' => $item->type,
+            'photopath' => $item->photopath ? asset('storage/'.$item->photopath) : null,
+            'youtube_link' => $item->youtube_link,
+            'sort_order' => $item->sort_order,
+        ];
     }
 }

@@ -8,39 +8,38 @@
 
 @section('content')
 
+    @php
+        $heroBg = \App\Models\Setting::get('home_hero_image', 'assets/images/img_8bfe976c8a21.jpg');
+    @endphp
     <!-- Hero Section -->
     <section class="relative w-full h-[921px] flex items-center justify-center overflow-hidden">
-        <!-- Hero Background Video Placeholder -->
         <div class="absolute inset-0 z-0">
             <div class="w-full h-full bg-cover bg-center filter brightness-50"
-                data-alt="A grand cinematic aerial view of a prestigious, modern school campus in Nepal during a golden sunset. The architecture blends traditional elements with large glass windows. Students in elegant uniforms are seen walking across a lush green courtyard. The lighting is warm and inspiring, emphasizing a sense of academic excellence and heritage."
-                style="background-image: url('{{ asset('assets/images/img_8bfe976c8a21.jpg') }}')">
+                data-alt="School campus hero image"
+                style="background-image: url('{{ str_starts_with($heroBg, 'home/') ? asset('storage/' . $heroBg) : asset($heroBg) }}')">
             </div>
             <div class="hero-gradient absolute inset-0"></div>
         </div>
         <div class="relative z-10 text-center text-white px-margin-mobile max-w-4xl mx-auto space-y-6">
             <span
-                class="bg-tertiary-container text-on-tertiary-container px-4 py-1.5 rounded-full font-label-sm text-label-sm uppercase tracking-widest animate-fade-in">Established
-                1956</span>
+                class="bg-tertiary-container text-on-tertiary-container px-4 py-1.5 rounded-full font-label-sm text-label-sm uppercase tracking-widest animate-fade-in">{{ \App\Models\Setting::get('home_hero_badge', 'Established 1956') }}</span>
             <h2 class="font-display-lg text-display-lg-mobile md:text-display-lg font-bold leading-tight drop-shadow-lg">
-                Empowering Minds, Shaping Futures
+                {{ \App\Models\Setting::get('home_hero_title', 'Empowering Minds, Shaping Futures') }}
             </h2>
             <p class="font-body-lg text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
-                Mahendra Secondary School - A Legacy of Excellence in providing world-class education for the leaders of
-                tomorrow.
+                {{ \App\Models\Setting::get('home_hero_subtitle', 'Mahendra Secondary School - A Legacy of Excellence in providing world-class education for the leaders of tomorrow.') }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <a href="{{ route('about') }}"
+                <a href="{{ \App\Models\Setting::get('home_cta_primary_link', '/about') }}"
                     class="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
-                    Discover Our History <span class="material-symbols-outlined">arrow_forward</span>
+                    {{ \App\Models\Setting::get('home_cta_primary_text', 'Discover Our History') }} <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
-                <a href="{{ route('gallery') }}"
+                <a href="{{ \App\Models\Setting::get('home_cta_secondary_link', '/gallery') }}"
                     class="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/20 transition-all text-center flex items-center justify-center">
-                    Virtual Tour
+                    {{ \App\Models\Setting::get('home_cta_secondary_text', 'Virtual Tour') }}
                 </a>
             </div>
         </div>
-        <!-- Scroll Indicator -->
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
             <span class="material-symbols-outlined text-white opacity-50 text-4xl">keyboard_arrow_down</span>
         </div>
@@ -63,8 +62,8 @@
                             class="flex gap-6 group cursor-pointer bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all">
                             <div
                                 class="flex-shrink-0 w-20 h-24 bg-primary text-white flex flex-col items-center justify-center rounded-lg">
-                                <span class="text-2xl font-bold">{{ $event['event_date']->format('d') }}</span>
-                                <span class="text-xs uppercase font-bold">{{ $event['event_date']->format('M') }}</span>
+                                <span class="text-2xl font-bold">{{ $event['event_date']?->format('d') ?? '--' }}</span>
+                                <span class="text-xs uppercase font-bold">{{ $event['event_date']?->format('M') ?? '--' }}</span>
                             </div>
                             <div class="space-y-1">
                                 <span class="text-secondary text-xs font-bold uppercase tracking-wider">{{ $event['type'] }}</span>
@@ -72,7 +71,7 @@
                                 <p class="text-on-surface-variant text-sm line-clamp-1">{{ $event['description'] }}</p>
                                 <div class="flex items-center gap-4 text-xs text-outline pt-2">
                                     <span class="flex items-center gap-1"><span
-                                            class="material-symbols-outlined text-xs">schedule</span> {{ \Carbon\Carbon::parse($event['starts_at'])->format('h:i A') }}</span>
+                                            class="material-symbols-outlined text-xs">schedule</span> {{ $event['starts_at'] ? \Carbon\Carbon::parse($event['starts_at'])->format('h:i A') : '--' }}</span>
                                     <span class="flex items-center gap-1"><span
                                             class="material-symbols-outlined text-xs">location_on</span> {{ $event['location'] }}</span>
                                 </div>
@@ -98,7 +97,7 @@
                                     class="bg-error text-white text-[10px] px-2 py-0.5 rounded-full font-bold">URGENT</span>
                             </div>
                             @endif
-                            <span class="text-xs font-bold text-outline">Published: {{ $notice['published_at']->format('M d, Y') }}</span>
+                            <span class="text-xs font-bold text-outline">Published: {{ $notice['published_at']?->format('M d, Y') ?? '--' }}</span>
                             <h4 class="font-bold text-lg mt-1 mb-2">{{ $notice['title'] }}</h4>
                             <p class="text-on-surface-variant text-sm">{{ Str::limit($notice['content'], 100) }}</p>
                         </div>
@@ -108,6 +107,7 @@
             </div>
         </div>
     </section>
+    @if ($principalMessage)
     <!-- Principal's Message -->
     <section class="w-full py-24 bg-surface-bright">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
@@ -142,6 +142,7 @@
             </div>
         </div>
     </section>
+    @endif
     <!-- Facilities Section -->
     <section class="w-full py-24 bg-surface">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">

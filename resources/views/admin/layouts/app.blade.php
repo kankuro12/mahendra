@@ -68,6 +68,22 @@
                     <span class="material-symbols-outlined text-[20px]">work</span>
                     <span class="text-sm font-medium">Careers</span>
                 </a>
+                <a href="{{ route('admin.home-settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.home-settings.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">home</span>
+                    <span class="text-sm font-medium">Home Settings</span>
+                </a>
+                <a href="{{ route('admin.contact-settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.contact-settings.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">settings</span>
+                    <span class="text-sm font-medium">Contact Settings</span>
+                </a>
+                <a href="{{ route('admin.contact-messages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.contact-messages.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">mail</span>
+                    <span class="text-sm font-medium">Messages</span>
+                </a>
+                <a href="{{ route('admin.faqs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.faqs.*') ? 'bg-white/15' : '' }}">
+                    <span class="material-symbols-outlined text-[20px]">help</span>
+                    <span class="text-sm font-medium">FAQs</span>
+                </a>
                 <a href="{{ route('admin.pages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-colors {{ request()->routeIs('admin.pages.*') ? 'bg-white/15' : '' }}">
                     <span class="material-symbols-outlined text-[20px]">description</span>
                     <span class="text-sm font-medium">Pages</span>

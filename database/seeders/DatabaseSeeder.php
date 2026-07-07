@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
         $this->call(PageSeeder::class);
         $this->call(DocumentSeeder::class);
+        $this->call(SettingsSeeder::class);
 
         User::factory()->create([
             'name' => 'Test User',

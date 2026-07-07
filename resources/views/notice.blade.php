@@ -47,8 +47,8 @@
                         <tr class="notice-row hover:bg-surface-bright transition-colors group">
                             <td class="px-6 py-5 whitespace-nowrap">
                                 <div class="flex flex-col">
-                                    <span class="text-on-surface font-semibold">{{ $notice['published_at']->format('M d') }}</span>
-                                    <span class="text-on-surface-variant text-label-sm">{{ $notice['published_at']->format('Y') }}</span>
+                                    <span class="text-on-surface font-semibold">{{ $notice['published_at']?->format('M d') ?? '--' }}</span>
+                                    <span class="text-on-surface-variant text-label-sm">{{ $notice['published_at']?->format('Y') ?? '--' }}</span>
                                 </div>
                             </td>
                             <td class="px-6 py-5">

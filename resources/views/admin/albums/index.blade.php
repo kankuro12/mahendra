@@ -39,7 +39,7 @@
                                 @endif
                             </td>
                             <td class="font-medium text-gray-900">{{ $album->title }}</td>
-                            <td class="text-sm">{{ $album->date ? \Carbon\Carbon::parse($album->date)->format('M d, Y') : '--' }}</td>
+                            <td class="text-sm">{{ $album->date && strtotime($album->date) !== false ? \Carbon\Carbon::parse($album->date)->format('M d, Y') : $album->date ?? '--' }}</td>
                             <td class="text-sm">{{ $album->items_count }} items</td>
                             <td>
                                 <div class="flex items-center gap-1">

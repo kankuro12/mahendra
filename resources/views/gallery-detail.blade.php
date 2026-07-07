@@ -52,8 +52,16 @@
                             </div>
                         </div>
                     @elseif ($item->type === 'youtube' && $item->youtube_link)
-                        <div class="rounded-xl overflow-hidden border border-outline-variant shadow-sm aspect-[16/9]">
-                            <iframe class="w-full h-full" src="{{ $item->youtube_link }}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        @php $ytId = $item->youtubeId(); @endphp
+                        <div class="group cursor-pointer rounded-xl overflow-hidden border border-outline-variant shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 relative aspect-[16/9] bg-gray-900" onclick="openYoutube('{{ $ytId }}')">
+                            @if ($ytId)
+                                <img src="https://img.youtube.com/vi/{{ $ytId }}/mqdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            @endif
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-white/95 p-4 rounded-full shadow-lg group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined text-primary text-3xl">play_arrow</span>
+                                </div>
+                            </div>
                         </div>
                     @endif
                 @endforeach
@@ -69,11 +77,21 @@
 
 <!-- Lightbox Modal -->
 <div id="lightbox-modal" class="hidden fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
-    <button class="absolute top-6 right-6 text-white hover:text-primary active:scale-95 transition-transform" onclick="closeLightbox()">
+    <button class="absolute top-6 right-6 text-white hover:text-primary active:scale-95 transition-transform z-10" onclick="closeLightbox()">
         <span class="material-symbols-outlined text-4xl">close</span>
     </button>
     <div class="max-w-5xl max-h-[80vh] flex items-center justify-center">
         <img id="lightbox-img" class="max-w-full max-h-[80vh] rounded-lg object-contain shadow-2xl" src="" alt="Lightbox View">
+    </div>
+</div>
+
+<!-- YouTube Modal -->
+<div id="youtube-modal" class="hidden fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
+    <button class="absolute top-6 right-6 text-white hover:text-primary active:scale-95 transition-transform z-10" onclick="closeYoutube()">
+        <span class="material-symbols-outlined text-4xl">close</span>
+    </button>
+    <div class="w-full max-w-5xl aspect-[16/9]">
+        <iframe id="youtube-player" class="w-full h-full rounded-lg" src="" title="YouTube player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
 </div>
 @endsection
@@ -98,9 +116,30 @@ function closeLightbox() {
     }
 }
 
+function openYoutube(videoId) {
+    const modal = document.getElementById('youtube-modal');
+    const player = document.getElementById('youtube-player');
+    if (modal && player) {
+        player.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
+}
+
+function closeYoutube() {
+    const modal = document.getElementById('youtube-modal');
+    const player = document.getElementById('youtube-player');
+    if (modal && player) {
+        modal.classList.add('hidden');
+        player.src = '';
+        document.body.classList.remove('overflow-hidden');
+    }
+}
+
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeLightbox();
+        closeYoutube();
     }
 });
 </script>
